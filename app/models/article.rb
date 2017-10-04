@@ -1,4 +1,4 @@
 class Article < ApplicationRecord
     belongs_to :user
-    belongs_to :language, optional: true
+    belongs_to :language
 end

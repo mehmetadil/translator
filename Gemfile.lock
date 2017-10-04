@@ -41,6 +41,8 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
+    autoprefixer-rails (7.1.4.1)
+      execjs
     awesome_print (1.8.0)
     bcrypt (3.1.11)
     better_errors (2.3.0)
@@ -50,6 +52,8 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
     builder (3.2.3)
     byebug (9.1.0)
     capybara (2.15.3)
@@ -207,9 +211,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   awesome_print
   better_errors
   binding_of_caller
+  bootstrap-sass (~> 3.2.0)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

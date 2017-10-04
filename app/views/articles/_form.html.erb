@@ -3,7 +3,7 @@
   <%= f.input :name%>
   <%= f.input :description%>
   <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id} %>
-  <%= f.input :language_id, :as => :hidden, :input_html => { :value => Language.first} %>
+  <%= f.select :language_id, @languages.map {|language| [language.name, language.id]} %>
   <%= f.button :submit%>
 <% end %>
 

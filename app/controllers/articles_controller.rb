@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article , only: [:show, :edit, :update, :destroy]
+  before_action :set_languages , only: [:new, :edit]  
   before_action :authenticate_user!, except: [:index]
 
   def index
@@ -47,5 +48,9 @@ class ArticlesController < ApplicationController
   
   def set_article
     @article = Article.find(params[:id])
+  end
+
+  def set_languages
+    @languages = Language.all
   end
 end
