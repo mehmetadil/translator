@@ -42,7 +42,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    binding.pry
     params.require(:article).permit(:name, :description, :language_id, :user_id)
   end
   
