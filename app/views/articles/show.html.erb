@@ -1,0 +1,5 @@
+<%= @article.name%> </br>
+<%= @article.description%> </br>
+
+<%= link_to 'Düzenle', edit_article_path(@article) %>
+<%= link_to 'Sil', article_path(@article), method: :delete %>
