@@ -1,6 +1,7 @@
 <%= @article.name%> </br>
 <%= @article.description%> </br>
 <%= @article.language.name%> </br>
+<%= link_to 'Materyaller', article_material_path(@article) %>
 <% if @article.user_id == current_user.id %>
     <%= link_to 'Düzenle', edit_article_path(@article) %>
     <%= link_to 'Sil', article_path(@article), method: :delete %>

@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article , only: [:show, :edit, :update, :destroy]
-  before_action :set_languages , only: [:new, :edit]  
+  before_action :set_languages  
   before_action :authenticate_user!, except: [:index, :show]
   before_action :check_if_acticle_belongs_to_user?, only: [:edit, :update, :destroy]
 
@@ -16,8 +16,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    binding.pry
     @article = Article.new(article_params)
-
+    @article.article_materials.build(article_material_params)
+    binding.pry
     if @article.save
       redirect_to myarticles_path
     else
@@ -53,6 +55,10 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:name, :description, :language_id, :user_id)
+  end
+
+  def article_material_params
+    params.require(:article).permit(article_material: [:description, :material])[:article_material]
   end
   
   def set_article

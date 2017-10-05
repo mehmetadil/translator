@@ -3,7 +3,11 @@
   <%= f.input :name%>
   <%= f.input :description%>
   <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id} %>
-  <%= f.select :language_id, @languages.map {|language| [language.name, language.id]} %>
+  <%= f.select :language_id, @languages.map {|language| [language.name, language.id]} %> </br>
+  <%= f.simple_fields_for :article_material do |m| %>
+    <%= m.input :description %>
+    <%= m.input :material,  as: :file %>
+  <% end %>
   <%= f.button :submit%>
 <% end %>
 
