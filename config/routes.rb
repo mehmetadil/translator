@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   resources :languages
 
   get "myoffers", to: 'offers#myoffers'
+  get "offer/:id", to: 'offers#show', :as => 'offer'
   post "create_offer", to: 'offers#create', :as => 'create_offer'
   put "accept_offer/:id", to: 'offers#accept_offer', :as => 'accept_offer'
+
+  get 'mytasks', to: 'tasks#mytasks'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

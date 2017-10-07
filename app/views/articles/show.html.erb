@@ -19,6 +19,8 @@ Dil:<%= @article.language.name%> </br>
   <%= f.input :description%>
   <%= f.input :price %>
   <%= f.input :translation_time%>
+  <%= f.select :target_language_id, @languages.map {|language| [language.name, language.id]} %> </br> <br>
+  <%= f.input :source_language_id, :as => :hidden, :input_html => { :value => @article.language_id} %>
   <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id} %>
   <%= f.input :article_id, :as => :hidden, :input_html => {:value => @article.id} %>
   <%= f.button :submit %>
