@@ -1,8 +1,0 @@
-<h1> Makaleler </h1>
-<% unless @articles.empty? %>
-  <%  @articles.each do |article|  %>
-  <%= link_to article.name, article_path(article)%> </br>
-  <%= article.user.email%>  </br>
-  <% end %>
-<% end %>
-
