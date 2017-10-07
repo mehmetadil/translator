@@ -1,6 +1,10 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: [:accept_offer]
 
+  def myoffers
+    @offers = Offer.where(user_id: current_user.id)
+  end
+
   def create
     @offer = Offer.new(offer_params)
     if @offer.save
