@@ -3,6 +3,23 @@ Açıklama:<%= @article.description%> </br>
 Dil:<%= @article.language.name%> </br>
 <%= link_to 'Materyaller', article_material_path(@article) %> </br>
 <% if @article.user_id == current_user.id %>
-    <%= link_to 'Düzenle', edit_article_path(@article) %>
-    <%= link_to 'Sil', article_path(@article), method: :delete %>
+  <%= link_to 'Düzenle', edit_article_path(@article) %>
+  <%= link_to 'Sil', article_path(@article), method: :delete %>
+<% end %>
+<h2> Teklifler </h2>
+<% @offers.each do |offer| %>
+  <%= offer.description%> </br>
+  <%= offer.price%> </br>
+  <%= offer.translation_time%> </br>
+  <%= offer.user.email%> </br>
+  <%= link_to 'Teklifi Kabul Et', accept_offer_path(offer), method: :put %>
+<% end %>
+<h2> Teklif Ver </h2>
+<%= simple_form_for  @article.offers.build, :url => create_offer_path, method: :post do |f|%>
+  <%= f.input :description%>
+  <%= f.input :price %>
+  <%= f.input :translation_time%>
+  <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id} %>
+  <%= f.input :article_id, :as => :hidden, :input_html => {:value => @article.id} %>
+  <%= f.button :submit %>
 <% end %>

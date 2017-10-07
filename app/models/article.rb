@@ -5,4 +5,5 @@ class Article < ApplicationRecord
     has_many :offers
     has_many :article_materials
     accepts_nested_attributes_for :article_materials
+    accepts_nested_attributes_for :offers
 end
