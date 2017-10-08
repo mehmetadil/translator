@@ -6,7 +6,7 @@ class OffersController < ApplicationController
   end
 
   def myoffers
-    @offers = Offer.where(user_id: current_user.id)
+    @offers = Offer.where(translator_id: current_user.id)
   end
 
   def create

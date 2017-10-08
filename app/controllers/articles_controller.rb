@@ -69,6 +69,6 @@ class ArticlesController < ApplicationController
   end
 
   def set_offers
-    @offers = @article.offers.order("created_at DESC") 
+    #@offers = @article.offers.order("created_at DESC") 
   end
 end
