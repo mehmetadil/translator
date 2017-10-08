@@ -1,0 +1,44 @@
+<%= @translate_order.title %> <br>
+<%= @translate_order.description %> <br>
+<%= @translate_order.price %> <br>
+<%= @translate_order.source_language.name %> <br>
+<%= @translate_order.target_language.name %> <br> <br>
+
+
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Teklif Ver</button> <br><br>
+
+
+<h3>Teklifler</h3>
+<% @offers.each do |offer| %>
+  <%= offer.description %> <br>
+  <%= offer.price %> <br>
+  <%= offer.translation_time %> <br>
+  <%= offer.translator.email %> <br>  
+  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: :put %>  <br>
+<% end %>
+<!-- Modal -->
+<div id="create_translate_order" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+   <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Teklif Ver</h4>
+    </div>
+    <div class="modal-body">
+      <%= simple_form_for(@translate_order.offers.build, :url => create_offer_path) do |f| %>
+        <%= f.input :description %>
+        <%= f.input :price %>
+        <%= f.input :translation_time %>
+        <%= f.input :translate_order_id, :as => :hidden, :input_html => { :value => @translate_order.id} %>
+        <%= f.input :translator_id, :as => :hidden, :input_html => { :value => current_user.id} %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
+    </div>
+  </div>
+ </div>
+</div>

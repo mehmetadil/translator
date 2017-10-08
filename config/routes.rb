@@ -14,5 +14,8 @@ Rails.application.routes.draw do
   put "accept_offer/:id", to: 'offers#accept_offer', :as => 'accept_offer'
 
   get 'mytasks', to: 'tasks#mytasks'
+
+  post 'create_translate_order', to: 'translate_orders#create', :as => 'create_translate_order'
+  resources :translate_orders, only: [:show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

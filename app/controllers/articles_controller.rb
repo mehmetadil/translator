@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :check_if_acticle_belongs_to_user?, only: [:edit, :update, :destroy]
   before_action :set_offers, only: [:show]
+  before_action :set_translate_orders, only: [:show]
 
   def index
     @articles = Article.all
@@ -70,5 +71,9 @@ class ArticlesController < ApplicationController
 
   def set_offers
     #@offers = @article.offers.order("created_at DESC") 
+  end
+
+  def set_translate_orders
+    @translate_orders = TranslateOrder.where(article_id: params[:id]).order("created_at DESC")
   end
 end
