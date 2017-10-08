@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :articles
   has_many :offers
   has_many :tasks
+  has_many :translate_orders
 end
