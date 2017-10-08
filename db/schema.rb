@@ -43,12 +43,10 @@ ActiveRecord::Schema.define(version: 20171008122336) do
     t.integer "price"
     t.integer "translation_time"
     t.string "status", default: "Pending"
-    t.integer "article_id"
-    t.integer "user_id"
+    t.integer "translate_order_id"
+    t.integer "translator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "source_language_id"
-    t.integer "target_language_id"
   end
 
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
