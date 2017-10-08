@@ -12,4 +12,4 @@
   - Makale yazarı metin üzerine not bırakabilicek
 
 
-ER Diagramı : https://www.draw.io/#G0B59oB9eA7G2qR1BRR3VXb2FDWmM
+ER Diagramı : https://drive.google.com/file/d/0B59oB9eA7G2qR1BRR3VXb2FDWmM/view?usp=sharing
