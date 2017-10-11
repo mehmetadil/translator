@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   post 'create_translate_order', to: 'translate_orders#create', :as => 'create_translate_order'
   resources :translate_orders, only: [:show]
   resources :translated_articles, only: [:show]
+  resources :version_trackers, only: [:show]
   post 'create_version_tracker', to: 'version_trackers#create', :as => 'create_version_tracker'
+  resources :version_tracker_materials, only: [:show]
+  get "download_version_tracker_material/:id", to: 'version_tracker_materials#download_material', :as => 'download_version_tracker_material' 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

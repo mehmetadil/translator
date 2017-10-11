@@ -1,6 +1,6 @@
-class ArticleMaterialsController < ApplicationController
+class VersionTrackerMaterialsController < ApplicationController
   def show
-    @article_materials = ArticleMaterial.where(article_id: params[:id])
+    @version_tracker_materials = VersionTrackerMaterial.where(version_tracker_id: params[:id])
   end
 
   def download_material
@@ -11,7 +11,7 @@ class ArticleMaterialsController < ApplicationController
 
   def download_url
     file_folder_id = params[:id]
-    file_name = ArticleMaterial.find(params[:id]).material_file_name
+    file_name = VersionTrackerMaterial.find(params[:id]).material_file_name
     if file_folder_id.to_i  < 10
       file_folder_name = "00" + file_folder_id
     elsif file_folder_id.to_i < 100
@@ -19,6 +19,6 @@ class ArticleMaterialsController < ApplicationController
     else
       file_folder_name = file_folder_id
     end 
-    "#{Rails.root}" + "/public/system/article_materials/materials/000/000/#{file_folder_name}/original/#{file_name}"
+    "#{Rails.root}" + "/public/system/version_tracker_materials/materials/000/000/#{file_folder_name}/original/#{file_name}"
   end
 end

@@ -4,7 +4,7 @@
 
 <h3>Versiyonlar</h3>
 <% @task.version_trackers.each do |version_tracker| %>
-  <%= version_tracker.name %> <br>
+  <%= link_to version_tracker.name, version_tracker_path(version_tracker) %> <br>
   <%= version_tracker.description %> <br>
 <% end %>
 
@@ -26,6 +26,10 @@
         <%= f.input :name %>
         <%= f.input :description %>
         <%= f.input :task_id, :as => :hidden, :input_html => { :value => @task.id} %>
+        <%= f.simple_fields_for :version_tracker_material do |m| %>
+          <%= m.input :description %>
+          <%= m.input :material, as: :file %>
+        <% end %>
         <%= f.button :submit %>
      <% end %>      
     </div>

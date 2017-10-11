@@ -1,0 +1,2 @@
+module VersionTrackerMaterialsHelper
+end
