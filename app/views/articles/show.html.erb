@@ -8,7 +8,11 @@ Dil:<%= @article.language.name%> </br>
 <% end %>
 <!-- Trigger the modal with a button -->
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Çeviri İsteği Oluştur</button>
-
+<h3>Versiyonlar</h3>
+<% @translated_articles.each do |translated_article| %>
+  <%= link_to translated_article.language.name, translated_article_path(translated_article) %>
+<% end %>
+<h3>Başka Sayfaya Alınacak</h3>
 <h3>Çeviri İstekleri</h3>
   <% @translate_orders.each do |translate_order| %>
     <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>

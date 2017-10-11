@@ -1,0 +1,9 @@
+<h1><%= @translated_article.language.name %></h1>
+<h3>Çeviriler</h3>
+<% @translated_article.tasks.each do |task| %>
+  <%= task.translator.email %> <br>
+  <%= task.status %> <br>
+  <%= task.source_language.name %> <br>
+  <%= task.target_language.name %> <br>
+  <%= link_to "İlgili Teklif", offer_path(task.offer.id) %>
+<% end %>

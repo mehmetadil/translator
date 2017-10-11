@@ -1,0 +1,2 @@
+module TranslatedArticlesHelper
+end
