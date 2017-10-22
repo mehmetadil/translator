@@ -1,27 +1,18 @@
 Makale Adı: <%= @article.name%> </br>
 Açıklama:<%= @article.description%> </br>
 Dil:<%= @article.language.name%> </br>
-<%= link_to 'Materyaller', article_material_path(@article) %> </br>
-<% if @article.user_id == current_user.id %>
+<% if article_belongs_to_user? %>
+  <%= link_to 'Materyaller', article_material_path(@article) %> </br>
   <%= link_to 'Düzenle', edit_article_path(@article) %>
   <%= link_to 'Sil', article_path(@article), method: :delete %>
-<% end %>
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Çeviri İsteği Oluştur</button>
-<h3>Versiyonlar</h3>
-<% @translated_articles.each do |translated_article| %>
-  <%= link_to translated_article.language.name, translated_article_path(translated_article) %>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Çeviri İsteği Oluştur</button>
+  <h3>Versiyonlar</h3>
+  <% @translated_articles.each do |translated_article| %>
+    <%= link_to translated_article.language.name, translated_article_path(translated_article) %>
+  <% end %>
 <% end %>
 <h3>Başka Sayfaya Alınacak</h3>
-<h3>Çeviri İstekleri</h3>
-  <% @translate_orders.each do |translate_order| %>
-    <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>
-    <%= translate_order.description %> <br>
-    <%= translate_order.price %> <br>
-    <%= translate_order.source_language.name %> <br>
-    <%= translate_order.target_language.name %>
-  <% end %>
-
+<%= link_to "Çeviri İstekleri", article_translate_orders_path(@article) %>
 
 <!-- Modal -->
 <div id="create_translate_order" class="modal fade" role="dialog">

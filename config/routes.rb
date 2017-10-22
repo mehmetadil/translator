@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [:show]
   post 'create_translate_order', to: 'translate_orders#create', :as => 'create_translate_order'
   resources :translate_orders, only: [:show]
+  get 'article_translate_orders/:id', to: 'translate_orders#article_translate_orders', :as => 'article_translate_orders'
   resources :translated_articles, only: [:show]
   resources :version_trackers, only: [:show]
   post 'create_version_tracker', to: 'version_trackers#create', :as => 'create_version_tracker'

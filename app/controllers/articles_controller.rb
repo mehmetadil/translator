@@ -2,10 +2,11 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :set_languages  
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_if_acticle_belongs_to_user?, only: [:edit, :update, :destroy]
+  before_action :user_have_alter_permissions?, only: [:edit, :update, :destroy]
   before_action :set_offers, only: [:show]
   before_action :set_translate_orders, only: [:show]
   before_action :set_translated_articles, only: [:show]
+  helper_method :article_belongs_to_user?
 
   def index
     @articles = Article.all
@@ -48,9 +49,7 @@ class ArticlesController < ApplicationController
     @articles = Article.where(user_id: current_user.id)
   end
 
-  def check_if_acticle_belongs_to_user?
-    redirect_back(fallback_location: articles_path) unless @article.user_id == current_user.id 
-  end
+
 
   private
 
@@ -80,5 +79,13 @@ class ArticlesController < ApplicationController
 
   def set_translated_articles
     @translated_articles = @article.translated_articles
+  end
+
+  def article_belongs_to_user?
+    user_signed_in? and @article.user_id == current_user.id  
+  end
+
+  def user_have_alter_permissions?
+    redirect_back(fallback_location: articles_path) unless acticle_belongs_to_user
   end
 end

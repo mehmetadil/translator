@@ -27,14 +27,20 @@
       <h4 class="modal-title">Teklif Ver</h4>
     </div>
     <div class="modal-body">
+    <% if user_signed_in? %>
       <%= simple_form_for(@translate_order.offers.build, :url => create_offer_path) do |f| %>
-        <%= f.input :description %>
-        <%= f.input :price %>
-        <%= f.input :translation_time %>
-        <%= f.input :translate_order_id, :as => :hidden, :input_html => { :value => @translate_order.id} %>
-        <%= f.input :translator_id, :as => :hidden, :input_html => { :value => current_user.id} %>
-        <%= f.button :submit %>
+       <%= f.input :description %>
+       <%= f.input :price %>
+       <%= f.input :translation_time %>
+       <%= f.input :translate_order_id, :as => :hidden, :input_html => { :value => @translate_order.id} %>
+       <%= f.input :translator_id, :as => :hidden, :input_html => { :value => current_user.id} %>
+       <%= f.button :submit %>
       <% end %>
+    <% else %>
+      <h3>Teklif Vermek İçin Üye Girişi Yapmalısınız</h3>
+      <%= link_to "Giriş Yap", new_user_session_path %> <br>
+      <%= link_to "Kayıt Ol", new_user_registration_path %>
+    <% end %>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>

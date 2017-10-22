@@ -1,6 +1,7 @@
 class TranslateOrdersController < ApplicationController
   before_action :set_translate_order, only: [:show]
-  before_action :set_offers, onlt: [:show]
+  before_action :set_offers, only: [:show]
+  before_action :set_article, only: [:article_translate_orders]
 
   def show
   end
@@ -15,6 +16,10 @@ class TranslateOrdersController < ApplicationController
     end
   end
 
+  def article_translate_orders
+    @translate_orders = @article.translate_orders
+  end
+
   private
 
   def translate_order_params
@@ -27,5 +32,9 @@ class TranslateOrdersController < ApplicationController
 
   def set_offers
     @offers = @translate_order.offers
+  end
+
+  def set_article
+    @article = Article.find(params[:id])
   end
 end
