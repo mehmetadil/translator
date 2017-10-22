@@ -1,5 +1,6 @@
 class ArticleMaterial < ApplicationRecord
     belongs_to :article
+    validates :description, :material, presence: true
     has_attached_file :material #, :storage => :database
     #validates_attachment_content_type :attachment, :content_type => 'text/plain'
     #validates_format_of :attachment_file_name, :with => %r{\.(docx|doc|pdf)$\z/}i

@@ -9,7 +9,6 @@ class VersionTrackersController < ApplicationController
     @version_tracker.version_tracker_materials.build(version_tracker_material_params)
     
     if @version_tracker.save
-      binding.pry
       redirect_to task_path(@version_tracker.task_id)
     else
       redirect_to task_path(@version_tracker.task_id)
