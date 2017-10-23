@@ -5,6 +5,6 @@ class TranslatedArticle < ApplicationRecord
 
 
   def self.check_if_translated_article_exist?(language_id)
-    @translated_article = TranslatedArticle.where(language_id: language_id).first
+    @translated_article = TranslatedArticle.find_by(language_id: language_id)
   end
 end

@@ -46,7 +46,7 @@ class ArticlesController < ApplicationController
   end
 
   def myarticles
-    @articles = Article.where(user_id: current_user.id)
+    @articles = current_user.articles
   end
 
 
@@ -82,7 +82,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_belongs_to_user?
-    user_signed_in? and @article.user_id == current_user.id  
+    user_signed_in? and @article.user == current_user  
   end
 
   def user_have_alter_permissions?

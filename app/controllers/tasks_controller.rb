@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   end
 
   def mytasks
-    @tasks = Task.where(translator_id: current_user.id)
+    @tasks = current_user.tasks
   end
 
   private
