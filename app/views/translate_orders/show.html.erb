@@ -15,7 +15,7 @@
   <%= offer.price %> <br>
   <%= offer.translation_time %> <br>
   <%= offer.translator.email %> <br>  
-  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: :put if offer.is_not_accepted? %>  <br>
+  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: :put unless offer.accepted? %>  <br>
 <% end %>
 <!-- Modal -->
 <div id="create_translate_order" class="modal fade" role="dialog">
