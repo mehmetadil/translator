@@ -15,7 +15,7 @@
   <%= offer.price %> <br>
   <%= offer.translation_time %> <br>
   <%= offer.translator.email %> <br>  
-  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: :put unless offer.accepted? %>  <br>
+  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put' unless offer.accepted? %>  <br>
 <% end %>
 <!-- Modal -->
 <div id="create_translate_order" class="modal fade" role="dialog">
@@ -28,12 +28,12 @@
     </div>
     <div class="modal-body">
     <% if user_signed_in? %>
-      <%= simple_form_for(@translate_order.offers.build, :url => create_offer_path) do |f| %>
+      <%= simple_form_for(@translate_order.offers.build, url: create_offer_path, method: 'post') do |f| %>
        <%= f.input :description %>
        <%= f.input :price %>
        <%= f.input :translation_time %>
-       <%= f.input :translate_order_id, :as => :hidden, :input_html => { :value => @translate_order.id} %>
-       <%= f.input :translator_id, :as => :hidden, :input_html => { :value => current_user.id} %>
+       <%= f.input :translate_order_id, as: 'hidden', input_html: { value: @translate_order.id} %>
+       <%= f.input :translator_id, as: 'hidden', input_html: { value: current_user.id} %>
        <%= f.button :submit %>
       <% end %>
     <% else %>

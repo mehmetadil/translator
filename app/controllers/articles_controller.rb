@@ -82,7 +82,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_belongs_to_user?
-    user_signed_in? and @article.user == current_user  
+    user_signed_in? && @article.user == current_user  
   end
 
   def user_have_alter_permissions?

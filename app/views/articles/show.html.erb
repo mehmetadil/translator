@@ -4,7 +4,7 @@ Dil:<%= @article.language.name%> </br>
 <% if article_belongs_to_user? %>
   <%= link_to 'Materyaller', article_material_path(@article) %> </br>
   <%= link_to 'Düzenle', edit_article_path(@article) %>
-  <%= link_to 'Sil', article_path(@article), method: :delete %>
+  <%= link_to 'Sil', article_path(@article), method: 'delete' %>
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Çeviri İsteği Oluştur</button>
   <h3>Versiyonlar</h3>
   <% @translated_articles.each do |translated_article| %>
@@ -24,14 +24,14 @@ Dil:<%= @article.language.name%> </br>
       <h4 class="modal-title">İstek Oluştur</h4>
     </div>
     <div class="modal-body">
-     <%= simple_form_for(@article.translate_orders.build, :url => create_translate_order_path, method: :post) do |f| %>
+     <%= simple_form_for(@article.translate_orders.build, url: create_translate_order_path, method: 'post') do |f| %>
       <%= f.input :title %>
       <%= f.input :description %>
       <%= f.input :price %>
       <%= f.select :target_language_id, @languages.map {|language| [language.name, language.id]} %> </br>
-      <%= f.input :source_language_id, :as => :hidden, :input_html => { :value => @article.language_id} %>
-      <%= f.input :user_id, :as => :hidden, :input_html => { :value => @article.user_id} %>
-      <%= f.input :article_id, :as => :hidden, :input_html => { :value => @article.id} %>
+      <%= f.input :source_language_id, as: 'hidden', input_html: { value: @article.language_id} %>
+      <%= f.input :user_id, as: 'hidden', input_html: { value: @article.user_id} %>
+      <%= f.input :article_id, as: 'hidden', input_html: { value: @article.id} %>
       <%= f.button :submit %>
      <% end %>      
     </div>

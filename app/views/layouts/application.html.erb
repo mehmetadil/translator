@@ -62,7 +62,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <% if user_signed_in?%>
                   <li><%= current_user.email%></li>
-                  <li><a><%= link_to "Çıkış Yap", destroy_user_session_path, method: :delete %></a></li> 
+                  <li><a><%= link_to "Çıkış Yap", destroy_user_session_path, method: 'delete' %></a></li> 
                 <% else%>
                  <li><a><%= link_to "Giriş Yap", new_user_session_path%></a></li>
                   <li><a><%= link_to "Kayıt Ol", new_user_registration_path%></a></li>

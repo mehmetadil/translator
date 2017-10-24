@@ -20,7 +20,7 @@ class OffersController < ApplicationController
   end
 
   def accept_offer # TODO set translated_article_id
-    @offer.update_attribute(:status, "Accepted" )
+    @offer.accepted!
     @task = Task.new(translator_id: @offer.translator_id, offer_id: @offer.id, source_language_id: @translate_order.source_language_id, target_language_id: @translate_order.target_language_id)
     
     unless @translated_article = TranslatedArticle.check_if_translated_article_exist?(@task.target_language_id)
