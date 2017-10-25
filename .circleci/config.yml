@@ -31,25 +31,11 @@ jobs:
           name: Bundle Install
           command: bin/bundle check --path vendor/bundle ||  bin/bundle install --path vendor/bundle --jobs 4 --retry 3
 
-      - run:
-          name: Yarn Install
-          command: yarn install
-
       - save_cache:
           name: Store bundle cache
           key: myapp-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-
-      - save_cache:
-          name: Store yarn cache
-          key: myapp-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.yarn-cache
-
-      - run:
-          name: Rubocop
-          command: bin/rubocop --rails
 
       - run:
           name: Wait for DB
