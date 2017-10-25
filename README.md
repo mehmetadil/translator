@@ -1,5 +1,7 @@
 # translator
 
+[![Code Climate](https://codeclimate.com/github/mehmetadil/translator.svg)](https://codeclimate.com/github/mehmetadil/translator)
+
 Tamamlanan Özellikler :
 
   -  Kullanıcılar, makale ve bu makalelerin materyallerini ekleyebilir. (PDF, Afiş vs.) (Paperclip) (article) (article_material)
