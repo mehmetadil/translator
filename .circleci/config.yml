@@ -1,46 +1,64 @@
 version: 2
 jobs:
   build:
-    parallelism: 3
-    working_directory: ~/circleci-demo-ruby-rails
+    working_directory: ~/myapp
     docker:
-      - image: circleci/ruby:2.4.1-node
+      - image: circleci/ruby:2.3-node
         environment:
+          PGHOST: 127.0.0.1
+          PGUSER: myapp-test
           RAILS_ENV: test
-      - image: library/mysql:5.7
-        env:
-          - MYSQL_ALLOW_EMPTY_PASSWORD=true
-          - MYSQL_ROOT_HOST=%
+      - image: mysql:5.6
+        environment:
+        - MYSQL_ROOT_PASSWORD=ubuntu
+        - MYSQL_DATABASE=circle_test
     steps:
       - checkout
 
-      # Restore bundle cache
       - restore_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          name: Restore bundle cache
+          keys:
+            - myapp-bundle-{{ checksum "Gemfile.lock" }}
+            - myapp-bundle-
 
-      # Bundle install dependencies
-      - run: bundle install --path vendor/bundle
+      - restore_cache:
+          name: Restore yarn cache
+          keys:
+            - myapp-yarn-{{ checksum "yarn.lock" }}
+            - myapp-yarn-
+
       - run:
-          name: install mysql
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
-      # Store bundle cache
+          name: Bundle Install
+          command: bin/bundle check --path vendor/bundle ||  bin/bundle install --path vendor/bundle --jobs 4 --retry 3
+
+      - run:
+          name: Yarn Install
+          command: yarn install
+
       - save_cache:
-          key: rails-demo-{{ checksum "Gemfile.lock" }}
+          name: Store bundle cache
+          key: myapp-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      - save_cache:
+          name: Store yarn cache
+          key: myapp-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.yarn-cache
 
-      # Run rspec in parallel
-      - run: |
-          bundle exec rspec --profile 10 \
-                            --format RspecJunitFormatter \
-                            --out test_results/rspec.xml \
-                            --format progress \
-                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - run:
+          name: Rubocop
+          command: bin/rubocop --rails
 
-      # Save test results for timing analysis
-      - store_test_results:
-          path: test_results
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      - run:
+          name: Run tests
+          command: bin/rails test
