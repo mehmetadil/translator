@@ -1,5 +1,4 @@
 class LanguagesController < ApplicationController
-
   before_action :set_language, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -38,7 +37,7 @@ class LanguagesController < ApplicationController
     @language.destroy
     redirect_to languages_path
   end
-  
+
   private
 
   def language_params

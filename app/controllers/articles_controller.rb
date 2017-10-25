@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :set_languages  
+  before_action :set_languages
   before_action :authenticate_user!, except: [:index, :show]
   before_action :user_have_alter_permissions?, only: [:edit, :update, :destroy]
   before_action :set_offers, only: [:show]
@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    if  @article.update_attributes(article_params)
+    if @article.update_attributes(article_params)
       redirect_to article_path(@article)
     else
       render :edit
@@ -49,8 +49,6 @@ class ArticlesController < ApplicationController
     @articles = current_user.articles
   end
 
-
-
   private
 
   def article_params
@@ -60,7 +58,7 @@ class ArticlesController < ApplicationController
   def article_material_params
     params.require(:article).permit(article_material: [:description, :material])[:article_material]
   end
-  
+
   def set_article
     @article = Article.find(params[:id])
   end
@@ -70,7 +68,7 @@ class ArticlesController < ApplicationController
   end
 
   def set_offers
-    #@offers = @article.offers.order("created_at DESC") 
+    # @offers = @article.offers.order('created_at DESC')
   end
 
   def set_translate_orders
@@ -82,7 +80,7 @@ class ArticlesController < ApplicationController
   end
 
   def article_belongs_to_user?
-    user_signed_in? && @article.user == current_user  
+    user_signed_in? && @article.user == current_user
   end
 
   def user_have_alter_permissions?

@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show]
   before_action :set_version_trackers, only: [:show]
+
   def show
   end
 
@@ -15,7 +16,6 @@ class TasksController < ApplicationController
   end
 
   def set_version_trackers
-    @version_trackers = @task.version_trackers.order("created_at DESC")
+    @version_trackers = @task.version_trackers.order('created_at DESC')
   end
-
 end

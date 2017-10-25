@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  validates :name, :description,  presence: true
+  validates :name, :description, presence: true
   belongs_to :user
   belongs_to :language
   has_many :article_materials

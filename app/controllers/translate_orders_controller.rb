@@ -23,7 +23,8 @@ class TranslateOrdersController < ApplicationController
   private
 
   def translate_order_params
-    params.require(:translate_order).permit(:title, :description, :price, :target_language_id, :source_language_id, :user_id, :article_id)
+    params.require(:translate_order).permit(:title, :description, :price, :target_language_id,
+                                            :source_language_id, :user_id, :article_id)
   end
 
   def set_translate_order
