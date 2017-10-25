@@ -20,7 +20,9 @@ jobs:
 
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
-
+      - run:
+          name: install mysql
+          command: dockerize -wait tcp://localhost:3306 -timeout 1m
       # Store bundle cache
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
