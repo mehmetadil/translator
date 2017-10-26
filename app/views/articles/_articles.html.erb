@@ -2,7 +2,7 @@
 <% unless @articles.empty? %>
   <%  @articles.each do |article|  %>
   <%= link_to article.name, article_path(article)%> </br>
-  <%= article.user.email%>  </br>
+  <%= link_to article.user.profile.full_name, profile_path(article.user.profile) %>  </br>
   <% end %>
 <% end %>
 
