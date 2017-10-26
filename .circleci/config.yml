@@ -12,6 +12,8 @@ jobs:
           - DB_PORT= 3306
       - image: circleci/mysql:5.7
         environment:
+          - MYSQL_USER=translator
+          - MYSQL_PASSWORD=translator
           - MYSQL_ROOT_PASSWORD=translator
           - MYSQL_DATABASE=translator_test
     steps:
