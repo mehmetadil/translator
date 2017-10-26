@@ -4,8 +4,11 @@ jobs:
   checkout_code:
     docker:
       - image: circleci/ruby:2.4.1-node
-      - image: circleci/mysql:5.7
       - image: circleci/node:7.10.0
+      - image: circleci/mysql:5.7
+          environment:
+            - MYSQL_ROOT_PASSWORD=ubuntu
+            - MYSQL_DATABASE=translator_test
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
@@ -17,8 +20,11 @@ jobs:
   bundle_dependencies:
     docker:
       - image: circleci/ruby:2.4.1-node
-      - image: circleci/mysql:5.7
       - image: circleci/node:7.10.0
+      - image: circleci/mysql:5.7
+          environment:
+            - MYSQL_ROOT_PASSWORD=ubuntu
+            - MYSQL_DATABASE=translator_test
     working_directory: ~/circleci-demo-workflows
     steps:
       - restore_cache:
@@ -34,8 +40,11 @@ jobs:
   rake_test:
     docker:
       - image: circleci/ruby:2.4.1-node
-      - image: circleci/mysql:5.7
       - image: circleci/node:7.10.0
+      - image: circleci/mysql:5.7
+          environment:
+            - MYSQL_ROOT_PASSWORD=ubuntu
+            - MYSQL_DATABASE=translator_test
     working_directory: ~/circleci-demo-workflows
     steps:
       - restore_cache:
