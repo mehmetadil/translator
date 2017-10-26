@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.1
       - image: circleci/mysql:5.7
-      - image: circleci/node:latest
+      - image: circleci/node:7.10.0
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
@@ -18,7 +18,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.1
       - image: circleci/mysql:5.7
-      - image: circleci/node:latest
+      - image: circleci/node:7.10.0
     working_directory: ~/circleci-demo-workflows
     steps:
       - restore_cache:
@@ -35,7 +35,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.1
       - image: circleci/mysql:5.7
-      - image: circleci/node:latest
+      - image: circleci/node:7.10.0
     working_directory: ~/circleci-demo-workflows
     steps:
       - restore_cache:
