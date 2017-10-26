@@ -6,8 +6,11 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def update
-    @profile.update_attributes(profile_params)
-    redirect_to profile_path(@profile)
+    if @profile.update_attributes(profile_params)
+      redirect_to profile_path(@profile)
+    else
+      render :edit
+    end
   end
 
   private
@@ -17,6 +20,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name)
+    params.require(:profile).permit(:first_name, :last_name, :avatar)
   end
 end

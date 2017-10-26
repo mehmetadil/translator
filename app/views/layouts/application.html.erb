@@ -61,6 +61,7 @@
               </form>
               <ul class="nav navbar-nav navbar-right">
                 <% if user_signed_in?%>
+                  <li><%= image_tag current_user.profile.avatar.url, size: 20 %></li>
                   <li><%= current_user.email%></li>
                   <li><a><%= link_to "Çıkış Yap", destroy_user_session_path, method: 'delete' %></a></li> 
                 <% else%>

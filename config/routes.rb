@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'translated_articles/show'
 
   root 'articles#index'
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :articles
   get 'myarticles', to: 'articles#myarticles'
   resources :article_materials, only: [:show]

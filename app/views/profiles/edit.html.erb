@@ -1,2 +1,8 @@
-<h1>Profiles#edit</h1>
-<p>Find me in app/views/profiles/edit.html.erb</p>
+<h1>Düzenle</h1>
+
+<%= simple_form_for(@profile) do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :avatar, as: :file %>
+  <%= f.button :submit %>
+<% end %>
