@@ -1,48 +1,46 @@
-version: 2
+version: 2.0
+
 jobs:
-  build:
-    working_directory: ~/myapp
+  checkout_code:
     docker:
-      - image: circleci/ruby:2.3-node
-        environment:
-          RAILS_ENV: test
+      - image: circleci/ruby:2.4.1
       - image: circleci/mysql:5.7
-        environment:
-        - MYSQL_ROOT_PASSWORD=ubuntu
-        - MYSQL_DATABASE=circle_test
+    working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
-
-      - restore_cache:
-          name: Restore bundle cache
-          keys:
-            - myapp-bundle-{{ checksum "Gemfile.lock" }}
-            - myapp-bundle-
-
-      - restore_cache:
-          name: Restore yarn cache
-          keys:
-            - myapp-yarn-{{ checksum "yarn.lock" }}
-            - myapp-yarn-
-
-      - run:
-          name: Bundle Install
-          command: bin/bundle check --path vendor/bundle ||  bin/bundle install --path vendor/bundle --jobs 4 --retry 3
-
       - save_cache:
-          name: Store bundle cache
-          key: myapp-bundle-{{ checksum "Gemfile.lock" }}
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - vendor/bundle
+            - ~/circleci-demo-workflows
 
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:3306 -timeout 1m
+  bundle_dependencies:
+    docker:
+      - image: circleci/ruby:2.4.1
+      - image: circleci/mysql:5.7
+    working_directory: ~/circleci-demo-workflows
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/circleci-demo-workflows/vendor/bundle
 
-      - run:
-          name: Database setup
-          command: bin/rails db:schema:load --trace
-
+  rake_test:
+    docker:
+      - image: circleci/ruby:2.4.1
+      - image: circleci/mysql:5.7
+    working_directory: ~/circleci-demo-workflows
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: v1-bundle-{{ checksum "Gemfile.lock" }}
+      - run: bundle --path vendor/bundle
+      - run: bundle exec rake db:create db:schema:load
       - run:
           name: Run tests
-          command: bin/rails test
+          command: bundle exec rake
