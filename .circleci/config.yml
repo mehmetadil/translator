@@ -3,7 +3,7 @@ version: 2.0
 jobs:
   checkout_code:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-node
       - image: circleci/mysql:5.7
       - image: circleci/node:7.10.0
     working_directory: ~/circleci-demo-workflows
@@ -16,7 +16,7 @@ jobs:
 
   bundle_dependencies:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-node
       - image: circleci/mysql:5.7
       - image: circleci/node:7.10.0
     working_directory: ~/circleci-demo-workflows
@@ -33,7 +33,7 @@ jobs:
 
   rake_test:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/ruby:2.4.1-node
       - image: circleci/mysql:5.7
       - image: circleci/node:7.10.0
     working_directory: ~/circleci-demo-workflows
