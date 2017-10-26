@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :articles
   get 'myarticles', to: 'articles#myarticles'
-  resources :article_materials, only: [:show]
+  get 'article_materials/:id', to: 'article_materials#materials', as: 'article_materials'
   get 'download_material/:id', to: 'article_materials#download_material',
                                as:  'download_material'
   resources :languages
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'article_translate_orders/:id', to: 'translate_orders#article_translate_orders',
                                       as: 'article_translate_orders'
   resources :translated_articles, only: [:show]
+  get 'translated_languages/:id', to: 'translated_articles#translated_languages', as: 'translated_languages'
   resources :version_trackers, only: [:show]
   post 'create_version_tracker', to: 'version_trackers#create',
                                  as: 'create_version_tracker'

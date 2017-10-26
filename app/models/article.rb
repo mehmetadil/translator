@@ -6,4 +6,8 @@ class Article < ApplicationRecord
   has_many :translate_orders
   has_many :translated_articles
   accepts_nested_attributes_for :article_materials
+
+  def belongs_to_user?(current_user)
+    user == current_user
+  end
 end

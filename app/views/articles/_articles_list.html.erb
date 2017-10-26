@@ -2,6 +2,8 @@
 <% unless @articles.empty? %>
   <%  @articles.each do |article|  %>
   <%= link_to article.name, article_path(article)%> </br>
+  <%= article.created_at.strftime("%d/%m/%Y") %> <br>
+  <%= image_tag article.user.profile.avatar.url, size: 15 %>
   <%= link_to article.user.profile.full_name, profile_path(article.user.profile) %>  </br>
   <% end %>
 <% end %>
