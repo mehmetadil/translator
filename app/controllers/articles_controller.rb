@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: %i[show edit update destroy]
   before_action :set_languages
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :user_have_alter_permissions?, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :user_have_alter_permissions?, only: %i[edit update destroy]
   before_action :set_offers, only: [:show]
   before_action :set_translate_orders, only: [:show]
   before_action :set_translated_articles, only: [:show]
@@ -12,8 +12,7 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @article = Article.new
@@ -29,8 +28,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @article.update_attributes(article_params)
@@ -56,7 +54,9 @@ class ArticlesController < ApplicationController
   end
 
   def article_material_params
-    params.require(:article).permit(article_material: [:description, :material])[:article_material]
+    params.require(:article)
+          .permit(article_material:
+                  %i[description material])[:article_material]
   end
 
   def set_article
@@ -72,7 +72,8 @@ class ArticlesController < ApplicationController
   end
 
   def set_translate_orders
-    @translate_orders = TranslateOrder.where(article_id: params[:id]).order("created_at DESC")
+    @translate_orders = TranslateOrder.where(article_id:
+                                          params[:id]).order('created_at DESC')
   end
 
   def set_translated_articles

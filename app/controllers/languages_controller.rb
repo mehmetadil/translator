@@ -1,12 +1,11 @@
 class LanguagesController < ApplicationController
-  before_action :set_language, only: [:show, :edit, :update, :destroy]
+  before_action :set_language, only: %i[show edit update destroy]
 
   def index
     @languages = Language.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @language = Language.new
@@ -22,8 +21,7 @@ class LanguagesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @language.update_attributes(language_params)

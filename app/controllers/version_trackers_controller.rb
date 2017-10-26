@@ -1,8 +1,7 @@
 class VersionTrackersController < ApplicationController
   before_action :set_version_tracker, only: [:show]
 
-  def show
-  end
+  def show; end
 
   def create
     @version_tracker = VersionTracker.new(version_tracker_params)
@@ -26,6 +25,8 @@ class VersionTrackersController < ApplicationController
   end
 
   def version_tracker_material_params
-    params.require(:version_tracker).permit(version_tracker_material: [:description, :material])[:version_tracker_material]
+    params.require(:version_tracker)
+          .permit(version_tracker_material:
+                  %i[description material])[:version_tracker_material]
   end
 end

@@ -1,8 +1,7 @@
 class TranslatedArticlesController < ApplicationController
   before_action :set_translated_article, only: [:show]
 
-  def show
-  end
+  def show; end
 
   private
 

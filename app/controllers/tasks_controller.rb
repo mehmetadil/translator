@@ -2,8 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show]
   before_action :set_version_trackers, only: [:show]
 
-  def show
-  end
+  def show; end
 
   def mytasks
     @tasks = current_user.tasks
