@@ -1,0 +1,7 @@
+<h3><%= @version_tracker.name %></h3>
+
+<%= @version_tracker.description %>
+<% @version_tracker.version_tracker_materials.each do |version_tracker_material| %>
+  <%= version_tracker_material.description %>
+  <%= link_to "İndir",  download_version_tracker_material_path(version_tracker_material) %>
+<% end %>

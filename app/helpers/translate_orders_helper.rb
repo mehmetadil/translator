@@ -1,0 +1,2 @@
+module TranslateOrdersHelper
+end

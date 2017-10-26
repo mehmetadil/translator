@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  completed_at: 2017-10-07
+  article_id: 1
+  user_id: 1
+  offer_id: 1
+
+two:
+  status: MyString
+  completed_at: 2017-10-07
+  article_id: 1
+  user_id: 1
+  offer_id: 1

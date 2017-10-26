@@ -1,0 +1,41 @@
+<h1>Çeviri Görevi</h1>
+
+<%= @task.status %> <br>
+
+<h3>Versiyonlar</h3>
+<% @task.version_trackers.each do |version_tracker| %>
+  <%= link_to version_tracker.name, version_tracker_path(version_tracker) %> <br>
+  <%= version_tracker.description %> <br>
+<% end %>
+
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Yeni Versiyonu Ekle</button>
+
+
+<!-- Modal -->
+<div id="create_translate_order" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+   <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">İstek Oluştur</h4>
+    </div>
+    <div class="modal-body">
+     <%= simple_form_for(@task.version_trackers.build, url: create_version_tracker_path, method: 'post') do |f| %>
+        <%= f.input :name %>
+        <%= f.input :description %>
+        <%= f.input :task_id, as: 'hidden', input_html: { value: @task.id} %>
+        <%= f.simple_fields_for :version_tracker_material do |m| %>
+          <%= m.input :description %>
+          <%= m.input :material, as: :file %>
+        <% end %>
+        <%= f.button :submit %>
+     <% end %>      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
+    </div>
+   </div>
+  </div>
+ </div>

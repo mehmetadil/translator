@@ -1,0 +1,8 @@
+<h1> Çevirilerim </h1>
+<% @tasks.each do |task| %>
+  
+  <%= task.status%> <br>
+  <%= task.target_language.name %> <br>
+  <%= task.source_language.name %>
+  <%= link_to "Göreve Git", task_path(task) %>
+<% end %>

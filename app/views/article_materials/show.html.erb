@@ -1,0 +1,4 @@
+<% @article_materials.each do |article_material| %>
+  Açıklama: <%= article_material.description%> <br>
+  <%= link_to 'İndir', download_material_path(article_material) %>
+<% end %>

@@ -1,0 +1,15 @@
+<h1>Yeni Makale</h1>
+<%= simple_form_for @article do |f| %>
+  <%= f.input :name%>
+  <%= f.input :description%>
+  <%= f.input :user_id, as: 'hidden', input_html: { value: current_user.id} %>
+  <%= f.select :language_id, @languages.map {|language| [language.name, language.id]} %> </br>
+  <h3> Materyal Ekle </h3>
+  <%= f.simple_fields_for :article_material do |m| %>
+    <%= m.input :description %>
+    <%= m.input :material,  as: :file %>
+  <% end %>
+  <%= f.button :submit%>
+<% end %>
+
+<%= link_to 'Geri', articles_path%>

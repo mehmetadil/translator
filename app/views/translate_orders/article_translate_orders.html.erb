@@ -1,0 +1,10 @@
+Makale Adı: <%= @article.name%> </br>
+Açıklama:<%= @article.description%> </br>
+Dil:<%= @article.language.name%> </br><br>
+<% @translate_orders.each do |translate_order| %>
+ <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>
+ <%= translate_order.description %> <br>
+ <%= translate_order.price %> <br>
+ <%= translate_order.source_language.name %> <br>
+ <%= translate_order.target_language.name %>
+<% end %>

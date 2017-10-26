@@ -1,0 +1,43 @@
+Makale Adı: <%= @article.name%> </br>
+Açıklama:<%= @article.description%> </br>
+Dil:<%= @article.language.name%> </br>
+<% if article_belongs_to_user? %>
+  <%= link_to 'Materyaller', article_material_path(@article) %> </br>
+  <%= link_to 'Düzenle', edit_article_path(@article) %>
+  <%= link_to 'Sil', article_path(@article), method: 'delete' %>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Çeviri İsteği Oluştur</button>
+  <h3>Versiyonlar</h3>
+  <% @translated_articles.each do |translated_article| %>
+    <%= link_to translated_article.language.name, translated_article_path(translated_article) %>
+  <% end %>
+<% end %>
+<h3>Başka Sayfaya Alınacak</h3>
+<%= link_to "Çeviri İstekleri", article_translate_orders_path(@article) %>
+
+<!-- Modal -->
+<div id="create_translate_order" class="modal fade" role="dialog">
+ <div class="modal-dialog">
+   <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">İstek Oluştur</h4>
+    </div>
+    <div class="modal-body">
+     <%= simple_form_for(@article.translate_orders.build, url: create_translate_order_path, method: 'post') do |f| %>
+      <%= f.input :title %>
+      <%= f.input :description %>
+      <%= f.input :price %>
+      <%= f.select :target_language_id, @languages.map {|language| [language.name, language.id]} %> </br>
+      <%= f.input :source_language_id, as: 'hidden', input_html: { value: @article.language_id} %>
+      <%= f.input :user_id, as: 'hidden', input_html: { value: @article.user_id} %>
+      <%= f.input :article_id, as: 'hidden', input_html: { value: @article.id} %>
+      <%= f.button :submit %>
+     <% end %>      
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
+    </div>
+   </div>
+  </div>
+ </div>
