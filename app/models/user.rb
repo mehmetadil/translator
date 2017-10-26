@@ -8,9 +8,12 @@ class User < ApplicationRecord
   has_many :offers, foreign_key: 'translator_id', primary_key: 'id', class_name: 'Offer'
   has_many :tasks, foreign_key: 'translator_id', primary_key: 'id', class_name: 'Task'
   has_many :translate_orders
-  after_commit :create_profile, on: :create
+  after_create :build_profile
 
-  def create_profile
-    Profile.create_profile(id, email)
+  def build_profile
+    create_profile(
+      first_name: '',
+      last_name: ''
+    )
   end
 end
