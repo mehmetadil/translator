@@ -6,15 +6,13 @@ jobs:
     docker:
       - image: circleci/ruby:2.4.1-node
         environment:
-          - DB_USERNAME= translator
-          - DB_PASSWORD= translator
+          - DB_USERNAME= root
+          - DB_PASSWORD= root
           - DB_HOST= 127.0.0.1
           - DB_PORT= 3306
       - image: circleci/mysql:5.7
         environment:
-          - MYSQL_USER=translator
-          - MYSQL_PASSWORD=translator
-          - MYSQL_ROOT_PASSWORD=translator
+          - MYSQL_ROOT_PASSWORD=root
           - MYSQL_DATABASE=translator_test
     steps:
       - checkout
