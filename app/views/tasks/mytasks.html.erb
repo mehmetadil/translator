@@ -1,8 +1,5 @@
-<h1> Çevirilerim </h1>
+<h1> Çeviri Görevlerim </h1>
 <% @tasks.each do |task| %>
-  
-  <%= task.status%> <br>
-  <%= task.target_language.name %> <br>
-  <%= task.source_language.name %>
-  <%= link_to "Göreve Git", task_path(task) %>
+  <%= link_to task.translate_order.article.name, task_path(task) %> <br>
+ Çeviri Durumu :  <%= task.status%> <br> 
 <% end %>

@@ -1,6 +1,6 @@
 <h1>Çeviri Görevi</h1>
 
-<%= @task.status %> <br>
+Durum: <%= @task.status %> <br>
 
 <h3>Versiyonlar</h3>
 <% @task.version_trackers.each do |version_tracker| %>
@@ -9,11 +9,11 @@
 <% end %>
 
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Yeni Versiyonu Ekle</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_version_tracker">Yeni Versiyonu Ekle</button>
 
 
 <!-- Modal -->
-<div id="create_translate_order" class="modal fade" role="dialog">
+<div id="create_version_tracker" class="modal fade" role="dialog">
  <div class="modal-dialog">
    <!-- Modal content-->
   <div class="modal-content">
@@ -34,7 +34,7 @@
      <% end %>      
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_version_tracker">Vazgeç</button>
     </div>
    </div>
   </div>
