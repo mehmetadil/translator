@@ -1,6 +1,12 @@
 <h1>Çeviri Görevi</h1>
 
 Durum: <%= @task.status %> <br>
+<% if current_user == @task.translator && @task.in_progress?  %>
+  <%= link_to "Çeviriyi Tamamla", complete_translation_path(@task), method: :put %>
+<% elsif current_user == @task.owner && @task.pending_approval? %>
+  <%= link_to "Çeviriyi Tamamla", complete_translation_path(@task), method: :put %> <br>
+  <%= link_to "Bitirme İsteğini Reddet", deny_complete_request_path(@task), method: :put %>
+<% end %>
 
 <h3>Versiyonlar</h3>
 <% @task.version_trackers.each do |version_tracker| %>

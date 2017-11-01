@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get 'mytasks', to: 'tasks#mytasks'
   resources :tasks, only: [:show]
+  put 'complete_translation/:id', to: 'tasks#complete_translation', as: 'complete_translation'
+  put 'deny_complete_request/:id', to: 'tasks#deny_complete_request', as: 'deny_complete_request'
   post 'create_translate_order', to: 'translate_orders#create',
                                  as: 'create_translate_order'
   resources :translate_orders, only: %i[show index]

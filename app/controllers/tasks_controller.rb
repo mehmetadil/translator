@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_task, only: [:show]
+  before_action :set_task, only: %i[show complete_translation deny_complete_request]
   before_action :set_version_trackers, only: [:show]
 
   def show
@@ -9,6 +9,16 @@ class TasksController < ApplicationController
 
   def mytasks
     @tasks = current_user.tasks
+  end
+
+  def complete_translation # TODO/ GUVENLIK ONLEMI AL
+    @task.in_progress? ? @task.pending_approval! : @task.done!
+    redirect_back(fallback_location: :back)
+  end
+
+  def deny_complete_request
+    @task.in_progress!
+    redirect_back(fallback_location: :back)
   end
 
   private

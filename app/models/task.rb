@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  enum status: %i[in_progress done]
+  enum status: %i[in_progress done pending_approval]
   belongs_to :offer
   belongs_to :translated_article
   belongs_to :translator, foreign_key: 'translator_id', primary_key: 'id', class_name: 'User'
