@@ -32,5 +32,6 @@ Rails.application.routes.draw do
   resources :version_tracker_materials, only: [:show]
   get "download_version_tracker_material/:id", to: 'version_tracker_materials#download_material',
                                                as: 'download_version_tracker_material'
+  resources :version_tracker_comments, only: [:create]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :offers, foreign_key: 'translator_id', primary_key: 'id', class_name: 'Offer'
   has_many :tasks, foreign_key: 'translator_id', primary_key: 'id', class_name: 'Task'
   has_many :translate_orders
+  has_many :version_tracker_comments
   after_create :build_profile
 
   def build_profile

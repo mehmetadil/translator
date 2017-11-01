@@ -6,6 +6,11 @@ Durum: <%= @task.status %> <br>
 <% @task.version_trackers.each do |version_tracker| %>
   <%= link_to version_tracker.name, version_tracker_path(version_tracker) %> <br>
   <%= version_tracker.description %> <br>
+  <% version_tracker.version_tracker_comments.each do |version_tracker_comment| %>
+    <h5><b> <%= version_tracker_comment.content %> <br>
+    <%= link_to version_tracker_comment.user.email, profile_path(version_tracker_comment.user) %> </b></h5> <br>
+  <% end %>
+    <%= render partial: 'version_tracker_comments/form', locals: {version_tracker: version_tracker} %>
 <% end %>
 
 <% if TasksHelper.task_belongs_to_user?(@task, current_user) %>
