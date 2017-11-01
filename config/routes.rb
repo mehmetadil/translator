@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :translate_orders, only: [:show]
   get 'article_translate_orders/:id', to: 'translate_orders#article_translate_orders',
                                       as: 'article_translate_orders'
+  get 'my_translate_orders', to: 'translate_orders#my_translate_orders',
+                             as: 'my_translate_orders'
   resources :translated_articles, only: [:show]
   get 'translated_languages/:id', to: 'translated_articles#translated_languages', as: 'translated_languages'
   resources :version_trackers, only: [:show]

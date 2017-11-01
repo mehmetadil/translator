@@ -1,9 +1,14 @@
 class TranslateOrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:my_translate_orders]
   before_action :set_translate_order, only: [:show]
   before_action :set_offers, only: [:show]
   before_action :set_article, only: [:article_translate_orders]
 
   def show; end
+
+  def my_translate_orders
+    @translate_orders = current_user.translate_orders
+  end
 
   def create
     @translate_order = TranslateOrder.new(translate_order_params)
