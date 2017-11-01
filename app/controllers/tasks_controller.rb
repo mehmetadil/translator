@@ -4,9 +4,7 @@ class TasksController < ApplicationController
   before_action :set_version_trackers, only: [:show]
 
   def show
-    unless user_authorized?
-      redirect_to root_path
-    end
+    redirect_to root_path unless user_authorized?
   end
 
   def mytasks
