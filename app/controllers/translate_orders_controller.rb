@@ -4,6 +4,10 @@ class TranslateOrdersController < ApplicationController
   before_action :set_offers, only: [:show]
   before_action :set_article, only: [:article_translate_orders]
 
+  def index
+    @translate_orders = TranslateOrder.all.order('created_at DESC')
+  end
+
   def show; end
 
   def my_translate_orders

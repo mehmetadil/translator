@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :tasks, only: [:show]
   post 'create_translate_order', to: 'translate_orders#create',
                                  as: 'create_translate_order'
-  resources :translate_orders, only: [:show]
+  resources :translate_orders, only: %i[show index]
   get 'article_translate_orders/:id', to: 'translate_orders#article_translate_orders',
                                       as: 'article_translate_orders'
   get 'my_translate_orders', to: 'translate_orders#my_translate_orders',
