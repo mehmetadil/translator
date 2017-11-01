@@ -1,4 +1,5 @@
 class OffersController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_offer, only: %i[show accept_offer]
   before_action :set_offer_translate_order, only: [:accept_offer]
 

@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_task, only: [:show]
   before_action :set_version_trackers, only: [:show]
 
