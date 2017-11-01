@@ -8,8 +8,9 @@ Durum: <%= @task.status %> <br>
   <%= version_tracker.description %> <br>
 <% end %>
 
-
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_version_tracker">Yeni Versiyonu Ekle</button>
+<% if TasksHelper.task_belongs_to_user?(@task, current_user) %>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_version_tracker">Yeni Versiyonu Ekle</button>
+<% end %>
 
 
 <!-- Modal -->
