@@ -19,7 +19,7 @@ Durum: <%= @task.status %> <br>
     <%= render partial: 'version_tracker_comments/form', locals: {version_tracker: version_tracker} %>
 <% end %>
 
-<% if TasksHelper.task_belongs_to_user?(@task, current_user) %>
+<% if task_belongs_to_user?(@task, current_user) %>
   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_version_tracker">Yeni Versiyonu Ekle</button>
 <% end %>
 

@@ -10,7 +10,7 @@
           <%= f.input :title %>
           <%= f.input :description %>
           <%= f.input :price %>
-          <%= f.select :target_language_id, LanguagesHelper.all.map {|language| [language.name, language.id]} %> </br>
+          <%= f.select :target_language_id, all_languages.map {|language| [language.name, language.id]} %> </br>
           <%= f.input :source_language_id, as: 'hidden', input_html: { value: article.language_id} %>
           <%= f.input :user_id, as: 'hidden', input_html: { value: article.user_id} %>
           <%= f.input :article_id, as: 'hidden', input_html: { value: article.id} %>

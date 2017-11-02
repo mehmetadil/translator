@@ -1,5 +1,5 @@
 module LanguagesHelper
-  def self.all
+  def all_languages
     Language.all
   end
 end

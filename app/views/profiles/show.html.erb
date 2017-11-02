@@ -3,6 +3,6 @@
 Soy İsim: <%= @profile.last_name %> <br>
 Email:  <%= @profile.user.email %> <br><br>
 
-<% if ProfilesHelper.profile_belongs_to_user?(@profile, current_user) %>
+<% if profile_belongs_to_user?(@profile, current_user) %>
   <%= link_to "Güncelle", edit_profile_path(@profile) %>
 <% end %>
