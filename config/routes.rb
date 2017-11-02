@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'articles#index'
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  notify_to :users
   resources :articles
   get 'myarticles', to: 'articles#myarticles'
   get 'article_materials/:id', to: 'article_materials#materials', as: 'article_materials'

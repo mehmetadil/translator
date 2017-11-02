@@ -5,5 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Language.create(name: "Türkçe")
-Language.create(name: "English")
+Language.create(name: 'Türkçe')
+Language.create(name: 'English')
+Language.create(name: 'French')

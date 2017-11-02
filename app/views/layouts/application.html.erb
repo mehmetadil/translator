@@ -12,6 +12,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
 
   <body>
@@ -43,7 +44,18 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><li><%= user_signed_in? ? (image_tag current_user.profile.avatar.url, size: 25)  : 'Misafir Kullanıcı'%> <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <% if any_unread_notification? %>
+                    <i class="fa fa-bell fa-1x" aria-hidden="true"></i></a>
+                  <% else %>
+                    <i class="fa fa-bell-o fa-1x" aria-hidden="true"></i>
+                  <% end %>
+                  <ul class="dropdown-menu">
+                    <%= render_notification user_notifications, fallback: :default %>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><li><%= user_signed_in? ? (image_tag current_user.profile.avatar.url, size: 25)  : 'Misafir Kullanıcı'%></a>
                   <ul class="dropdown-menu">
                     <% if user_signed_in?%>
                       <li><a href="#"><%= link_to "Profilim", profile_path(current_user.profile) %></a></li>

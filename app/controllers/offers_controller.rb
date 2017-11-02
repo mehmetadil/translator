@@ -12,6 +12,7 @@ class OffersController < ApplicationController
   def create
     @offer = Offer.new(offer_params)
     if @offer.save
+      @offer.notify :users, key: 'offer.create', notifier: @offer.translator
       redirect_to translate_order_path(@offer.translate_order_id)
     else
       redirect_to translate_order_path(@offer.translate_order_id)
