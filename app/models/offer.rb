@@ -1,6 +1,6 @@
 class Offer < ApplicationRecord
-  enum status: %i[pending accepted]
-  belongs_to :translator, foreign_key: 'translator_id', primary_key: 'id', class_name: 'User'
-  has_one :task
+  enum status: { pending: 0, accepted: 1 }
+  belongs_to :translator, foreign_key: 'translator_id', class_name: 'User'
+  has_one :task, dependent: :destroy
   belongs_to :translate_order
 end
