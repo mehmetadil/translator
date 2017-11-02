@@ -12,12 +12,19 @@ class TasksController < ApplicationController
   end
 
   def complete_translation # TODO/ GUVENLIK ONLEMI AL
-    @task.in_progress? ? @task.pending_approval! : @task.done!
+    if @task.in_progress?
+      @task.pending_approval!
+      @task.notify :users, key: 'task.pending_approval', notifier: @task.translator
+    else
+      @task.done!
+      @task.notify :users, key: 'task.complete_translation', notifier: @task.owner
+    end
     redirect_back(fallback_location: :back)
   end
 
   def deny_complete_request
     @task.in_progress!
+    @task.notify :users, key: 'task.deny_complete_request', notifier: @task.owner
     redirect_back(fallback_location: :back)
   end
 

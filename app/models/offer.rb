@@ -5,7 +5,7 @@ class Offer < ApplicationRecord
   belongs_to :translate_order
   acts_as_notifiable :users,
     targets: ->(offer, key) {
-      ([offer.translate_order.user]).uniq
+      ([offer.translator] + [offer.translate_order.user]).uniq  # İleride dizinin eleman sayısı artabilir.
     },
     tracked: true,
     notifiable_path: :translate_order_notifiable_path

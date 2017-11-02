@@ -7,4 +7,15 @@ class Task < ApplicationRecord
   belongs_to :target_language, foreign_key: 'target_language_id', class_name: 'Language'
   belongs_to :source_language, foreign_key: 'source_language_id', class_name: 'Language'
   has_many :version_trackers, dependent: :destroy
+
+  acts_as_notifiable :users,
+    targets: ->(task, key) {
+      ([task.translator] + [task.owner]).uniq  # İleride dizinin eleman sayısı artabilir.
+    },
+    tracked: true,
+    notifiable_path: :task_notifiable_path
+
+  def task_notifiable_path
+    task_path(self)
+  end
 end

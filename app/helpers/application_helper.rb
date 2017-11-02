@@ -1,7 +1,12 @@
 module ApplicationHelper
-
   def user_notifications
-    @notifications = current_user.notifications if user_signed_in?
+    # Kullanıcıya kendi hareketleri de bildirim olarak gidiyor.
+    @notifications = 
+                     if user_signed_in?
+                       current_user.notifications.
+                       where.not(notifier_id: current_user).
+                       order('created_at desc')
+                     end
   end
 
   def any_unread_notification?

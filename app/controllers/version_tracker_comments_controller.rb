@@ -4,6 +4,9 @@ class VersionTrackerCommentsController < ApplicationController
   def create
     @version_tracker_comment = VersionTrackerComment.new(tracker_comment_params)
     @version_tracker_comment.save
+    @version_tracker_comment.notify :users,
+                                    key: 'version_tracker_comment.create',
+                                    notifier: @version_tracker_comment.user
     redirect_back(fallback_location: :back)
   end
 

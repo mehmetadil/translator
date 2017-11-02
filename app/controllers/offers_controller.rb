@@ -21,7 +21,9 @@ class OffersController < ApplicationController
 
   def accept_offer
     @offer.accepted!
+    @offer.notify :users, key: 'offer.accepted', notifier: @offer.translate_order.user
     @task = Task.new(translator_id: @offer.translator_id,
+                     owner_id: @offer.translate_order.user
                      offer_id: @offer.id,
                      source_language_id: @translate_order.source_language_id,
                      target_language_id: @translate_order.target_language_id)
