@@ -5,8 +5,10 @@
 <%= @translate_order.target_language.name %> <br> <br>
 
 
+<% unless order_belongs_to_user?(@translate_order, current_user) %>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Teklif Ver</button> <br><br>
+<% end %>
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Teklif Ver</button> <br><br>
 
 
 <h3>Teklifler</h3>
@@ -15,7 +17,7 @@
   <%= offer.price %> <br>
   <%= offer.translation_time %> <br>
   <%= offer.translator.email %> <br>  
-  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put' unless offer.accepted? %>  <br>
+  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put' if order_belongs_to_user?(@translate_order, current_user) && !(offer.accepted?) %>  <br>
 <% end %>
 <!-- Modal -->
 <div id="create_translate_order" class="modal fade" role="dialog">

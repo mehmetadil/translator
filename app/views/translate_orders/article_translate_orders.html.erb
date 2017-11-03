@@ -1,6 +1,5 @@
-Makale Adı: <%= @article.name%> </br>
-Açıklama:<%= @article.description%> </br>
-Dil:<%= @article.language.name%> </br><br>
+<%= render partial: 'articles/article', locals: {article: @article} %> <br><br>
+<h1>Çeviri İstekleri</h1> 
 <% @translate_orders.each do |translate_order| %>
  <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>
  <%= translate_order.description %> <br>
@@ -8,3 +7,4 @@ Dil:<%= @article.language.name%> </br><br>
  <%= translate_order.source_language.name %> <br>
  <%= translate_order.target_language.name %>
 <% end %>
+<%= render partial: 'form', locals: {article: @article} %>

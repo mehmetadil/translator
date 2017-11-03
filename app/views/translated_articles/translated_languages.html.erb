@@ -1,0 +1,7 @@
+<%= render partial: 'articles/article', locals: {
+                                        article: @article}%>
+<%= render partial: 'translate_orders/form', locals: {article: @article} %>
+<h3>Versiyonlar</h3>
+<% @translated_articles.each do |translated_article| %>
+ <%= link_to translated_article.language.name, translated_article_path(translated_article) %>
+<% end %>

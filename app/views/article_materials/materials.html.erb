@@ -1,0 +1,6 @@
+<%= render partial: 'articles/article', locals: {article: @article} %> <br><br>
+<%= render partial: 'translate_orders/form', locals: {article: @article} %> 
+<% @article_materials.each do |article_material| %>
+  Açıklama: <%= article_material.description%> <br>
+  <%= link_to 'İndir', download_material_path(article_material) %> <br><br>
+<% end %>

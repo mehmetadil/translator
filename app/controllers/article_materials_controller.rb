@@ -1,8 +1,9 @@
 class ArticleMaterialsController < ApplicationController
   before_action :set_article_material, only: [:download_material]
+  before_action :set_article, only: [:materials]
 
-  def show
-    @article_materials = ArticleMaterial.where(article_id: params[:id])
+  def materials
+    @article_materials = @article.article_materials
   end
 
   def download_material
@@ -13,5 +14,9 @@ class ArticleMaterialsController < ApplicationController
 
   def set_article_material
     @article_material = ArticleMaterial.find(params[:id])
+  end
+
+  def set_article
+    @article = Article.find(params[:id])
   end
 end
