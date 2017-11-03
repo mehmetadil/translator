@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :translate_orders, dependent: :destroy
   has_many :version_tracker_comments, dependent: :destroy
   after_create :build_profile
-  acts_as_target
+
   def build_profile
     create_profile(
       first_name: '',
