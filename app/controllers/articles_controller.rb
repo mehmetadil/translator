@@ -50,7 +50,8 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:name, :description, :language_id, :user_id)
+    params.require(:article).permit(:name, :description, :language_id,
+                                    :user_id, tag_ids: [])
   end
 
   def article_material_params

@@ -1,6 +1,10 @@
 Makale Adı: <%= article.name%> </br>
 Açıklama:<%= article.description%> </br>
 Dil:<%= article.language.name%> </br>
+Etiketler:
+<% article.tags.each do |tag| %>
+  <%= tag.name %>
+<% end %> <br>
 <% if article.belongs_to_user?(current_user) %>
   <%= link_to 'Düzenle', edit_article_path(article) %>
   <%= link_to 'Sil', article_path(article), method: 'delete' %> <br>
