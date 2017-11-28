@@ -10,15 +10,15 @@
           <%= f.input :title %>
           <%= f.input :description %>
           <%= f.input :price %>
-          <%= f.select :target_language_id, all_languages.map {|language| [language.name, language.id]} %> </br>
+          <%= f.select :target_language_id, all_languages.map {|language| [language.name, language.id]} %> </br><br>
           <%= f.input :source_language_id, as: 'hidden', input_html: { value: article.language_id} %>
           <%= f.input :user_id, as: 'hidden', input_html: { value: article.user_id} %>
           <%= f.input :article_id, as: 'hidden', input_html: { value: article.id} %>
-          <%= f.button :submit %>
+          <%= f.button :submit, class: "btn btn-success" %>
         <% end %>      
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
+        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
       </div>
     </div>
   </div>
