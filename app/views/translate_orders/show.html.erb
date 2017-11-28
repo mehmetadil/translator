@@ -11,13 +11,18 @@
 
 
 
-<h3>Teklifler</h3>
+<h2>Teklifler</h2>
 <% @offers.each do |offer| %>
-  <%= offer.description %> <br>
-  <%= offer.price %> <br>
-  <%= offer.translation_time %> <br>
-  <%= offer.translator.email %> <br>  
-  <%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put' if order_belongs_to_user?(@translate_order, current_user) && !(offer.accepted?) %>  <br>
+  Açıklama: <%= offer.description %> <br>
+  Talep Edilen Ücret: <%= offer.price %> <br>
+  Çeviri Süresi: <%= offer.translation_time %> <br>
+  Tercüman: <%= link_to offer.translator.email, profile_path(offer.translator.profile) %> <br>
+  <% if order_belongs_to_user?(@translate_order, current_user) && !(offer.accepted?) %>  
+    <button class= "btn btn-success"><%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put', style: "color: white; text-decoration: none"%>
+    </button>
+  <% else %>
+    <h4> Teklif Kabul Edildi </h4>
+  <% end %> <br> <br>
 <% end %>
 <!-- Modal -->
 <div id="create_translate_order" class="modal fade" role="dialog">
