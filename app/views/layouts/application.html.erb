@@ -40,8 +40,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: rgba(255,255,255,0.75)"><li><%= user_signed_in? ? (image_tag current_user.profile.avatar.url, size: 25)  : 'Misafir Kullanıcı'%> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <% if user_signed_in?%>
-                    <li><a href="#"><%= link_to "Profilim", profile_path(current_user.profile), style: "color: rgba(255,255,255,0.75)" %></a></li>
-                    <li><a href="#"><%= link_to "Çıkış Yap", destroy_user_session_path, method: 'delete', style: "color: rgba(255,255,255,0.75)" %></a></li>
+                    <li><a href="#"><%= link_to "Profilim", profile_path(current_user.profile)%></a></li>
+                    <li><a href="#"><%= link_to "Çıkış Yap", destroy_user_session_path, method: 'delete' %></a></li>
                   <% else%>
                     <li><a href="#"><%= link_to "Giriş Yap", new_user_session_path%></a></li>
                     <li><a href="#"><%= link_to "Kayıt Ol", new_user_registration_path%></a></li>

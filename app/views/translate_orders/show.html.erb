@@ -24,6 +24,8 @@
     <h4> Teklif Kabul Edildi </h4>
   <% end %> <br> <br>
 <% end %>
+
+<!-- Modal offer klasörü altına taşınacak -->
 <!-- Modal -->
 <div id="create_translate_order" class="modal fade" role="dialog">
  <div class="modal-dialog">
@@ -41,7 +43,7 @@
        <%= f.input :translation_time %>
        <%= f.input :translate_order_id, as: 'hidden', input_html: { value: @translate_order.id} %>
        <%= f.input :translator_id, as: 'hidden', input_html: { value: current_user.id} %>
-       <%= f.button :submit %>
+       <%= f.button :submit, class: "btn btn-success" %>
       <% end %>
     <% else %>
       <h3>Teklif Vermek İçin Üye Girişi Yapmalısınız</h3>
