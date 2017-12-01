@@ -1,8 +1,11 @@
 <%= @translate_order.title %> <br>
-<%= @translate_order.description %> <br>
-<%= @translate_order.price %> <br>
-<%= @translate_order.source_language.name %> <br>
-<%= @translate_order.target_language.name %> <br> <br>
+Açıklama: <%= @translate_order.description %> <br>
+Çeviri Ücreti:  <%= @translate_order.price %> <br>
+Kaynak Dil: <%= @translate_order.source_language.name %> <br>
+Hedef Dil: <%= @translate_order.target_language.name %> <br> 
+İlan Sahibi:
+<%= image_tag @translate_order.user.profile.avatar.url, size: 15 %>
+<%= link_to @translate_order.user.email, profile_path(@translate_order.user) %> <br> <br>
 
 
 <% unless order_belongs_to_user?(@translate_order, current_user) %>
@@ -16,44 +19,16 @@
   Açıklama: <%= offer.description %> <br>
   Talep Edilen Ücret: <%= offer.price %> <br>
   Çeviri Süresi: <%= offer.translation_time %> <br>
-  Tercüman: <%= link_to offer.translator.email, profile_path(offer.translator.profile) %> <br>
+  Teklif Tarihi: <%= offer.created_at.strftime("%d/%m/%Y") %> <br>
+  Teklif Eden:
+  <%= image_tag offer.translator.profile.avatar.url, size: 15 %>
+  <%= link_to offer.translator.email, profile_path(offer.translator.profile) %> <br>
   <% if order_belongs_to_user?(@translate_order, current_user) && !(offer.accepted?) %>  
     <button class= "btn btn-success"><%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put', style: "color: white; text-decoration: none"%>
     </button>
-  <% else %>
+  <% elsif order_belongs_to_user?(@translate_order, current_user) && offer.accepted? %>
     <h4> Teklif Kabul Edildi </h4>
   <% end %> <br> <br>
 <% end %>
 
-<!-- Modal offer klasörü altına taşınacak -->
-<!-- Modal -->
-<div id="create_translate_order" class="modal fade" role="dialog">
- <div class="modal-dialog">
-   <!-- Modal content-->
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Teklif Ver</h4>
-    </div>
-    <div class="modal-body">
-    <% if user_signed_in? %>
-      <%= simple_form_for(@translate_order.offers.build, url: create_offer_path, method: 'post') do |f| %>
-       <%= f.input :description %>
-       <%= f.input :price %>
-       <%= f.input :translation_time %>
-       <%= f.input :translate_order_id, as: 'hidden', input_html: { value: @translate_order.id} %>
-       <%= f.input :translator_id, as: 'hidden', input_html: { value: current_user.id} %>
-       <%= f.button :submit, class: "btn btn-success" %>
-      <% end %>
-    <% else %>
-      <h3>Teklif Vermek İçin Üye Girişi Yapmalısınız</h3>
-      <%= link_to "Giriş Yap", new_user_session_path %> <br>
-      <%= link_to "Kayıt Ol", new_user_registration_path %>
-    <% end %>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Vazgeç</button>
-    </div>
-  </div>
- </div>
-</div>
+<%= render 'offers/form' %>

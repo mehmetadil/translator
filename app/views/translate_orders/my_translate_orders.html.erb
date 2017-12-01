@@ -1,8 +1,1 @@
-<% @translate_orders.each do |translate_order| %>
-  <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>
-  <%= translate_order.description %> <br>
-  <%= translate_order.price %> <br>
-  <%= translate_order.source_language.name %> <br>
-  <%= translate_order.target_language.name %> <br>
-  <%= link_to translate_order.article.name, article_path(translate_order.article) %> <br><br>
-<% end %>
+<%= render partial: "translate_orders", locals: {translate_orders: @translate_orders} %>

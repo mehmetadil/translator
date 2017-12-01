@@ -5,9 +5,11 @@ Durum: <%= @task.status %> <br>
   <button class="btn btn-warning"><%= link_to "Çeviriyi Tamamla", complete_translation_path(@task), method: :put, style: "color: white" %>
   </button>  
 <% elsif current_user == @task.owner && @task.pending_approval? %>
-  <button class="btn btn-warning"><%= link_to "Çeviriyi Tamamla", complete_translation_path(@task), method: :put %>
+  <button class="btn btn-warning"><%= link_to "Çeviriyi Tamamla", complete_translation_path(@task), method: :put, style: "color: white" %>
   </button> <br>
-  <%= link_to "Bitirme İsteğini Reddet", deny_complete_request_path(@task), method: :put %>
+  <button class="btn btn-danger">
+  <%= link_to "Bitirme İsteğini Reddet", deny_complete_request_path(@task), method: :put, style: "color: white" %>
+  </button>
 <% end %>
 
 <h3>Versiyonlar</h3>
@@ -17,6 +19,7 @@ Durum: <%= @task.status %> <br>
 <h4>Yorum Yap</h4>
   <% version_tracker.version_tracker_comments.each do |version_tracker_comment| %>
     <h5><b> <%= version_tracker_comment.content %> <br>
+    <%= version_tracker_comment.created_at.strftime("%d/%m/%Y") %> <br>
     <%= link_to version_tracker_comment.user.email, profile_path(version_tracker_comment.user) %> </b></h5> <br>
   <% end %>
     <%= render partial: 'version_tracker_comments/form', locals: {version_tracker: version_tracker} %>
@@ -26,31 +29,4 @@ Durum: <%= @task.status %> <br>
   <button type="button" class="btn btn-info" data-toggle="modal" data-target="#create_version_tracker">Yeni Versiyon Ekle</button>
 <% end %>
 
-<!-- modal version_tracker dosyasına taşınacak -->
-<!-- Modal -->
-<div id="create_version_tracker" class="modal fade" role="dialog">
- <div class="modal-dialog">
-   <!-- Modal content-->
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">İstek Oluştur</h4>
-    </div>
-    <div class="modal-body">
-     <%= simple_form_for(@task.version_trackers.build, url: create_version_tracker_path, method: 'post') do |f| %>
-        <%= f.input :name %>
-        <%= f.input :description %>
-        <%= f.input :task_id, as: 'hidden', input_html: { value: @task.id} %>
-        <%= f.simple_fields_for :version_tracker_material do |m| %>
-          <%= m.input :description %>
-          <%= m.input :material, as: :file %>
-        <% end %>
-        <%= f.button :submit, class: "btn btn-success" %>
-     <% end %>      
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#create_version_tracker">Vazgeç</button>
-    </div>
-   </div>
-  </div>
- </div>
+<%= render "version_trackers/form" %>
