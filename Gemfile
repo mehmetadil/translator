@@ -49,12 +49,9 @@ group :development, :test do
   gem 'factory_bot'
   gem 'pry-rails'
   gem 'selenium-webdriver'
-  gem "minitest-rails"
-end
-
-group :test do
   gem "minitest-rails-capybara"
 end
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
