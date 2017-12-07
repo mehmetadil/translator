@@ -4,5 +4,8 @@
   Fiyat: <%= offer.price%> </br>
   Çeviri Süresi: <%= offer.translation_time %> </br>
   Teklif Durumu: <%= offer.status%> </br>
-  İlgili Makale:
+  İlgili İlan: <%= link_to offer.translate_order.title, translate_order_path(offer.translate_order) %> <br>
+  İlan Sahibi:
+  <%= image_tag offer.translate_order.user.profile.avatar.url, size: 15 %> 
+  <%= link_to offer.translate_order.user.email, profile_path(offer.translate_order.user) %>  <br> <br>  
 <% end %>

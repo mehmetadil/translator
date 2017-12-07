@@ -41,7 +41,7 @@ class TranslateOrdersController < ApplicationController
   end
 
   def set_offers
-    @offers = @translate_order.offers
+    @offers = @translate_order.offers.order('created_at DESC')
   end
 
   def set_article

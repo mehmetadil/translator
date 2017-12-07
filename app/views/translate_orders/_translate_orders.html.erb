@@ -1,0 +1,11 @@
+<% translate_orders.each do |translate_order| %>
+  İlan: <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>
+  Açıklama: <%= translate_order.description %> <br>
+  Çeviri Ücreti: <%= translate_order.price %> <br>
+  Kaynak Dil:<%= translate_order.source_language.name %> <br>
+  Hedef Dil: <%= translate_order.target_language.name %> <br>
+  İlan Tarihi: <%= translate_order.created_at.strftime("%d/%m/%Y") %> <br>
+  İlan Sahibi:
+  <%= image_tag translate_order.user.profile.avatar.url, size: 15 %>
+  <%= link_to translate_order.user.email, profile_path(translate_order.user.profile) %> <br> <br>
+<% end %>

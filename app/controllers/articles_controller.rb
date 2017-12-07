@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.article_materials.build(article_material_params)
     if @article.save
-      redirect_to myarticles_path
+      redirect_to article_path(@article)
     else
       render :new
     end
@@ -50,7 +50,8 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:name, :description, :language_id, :user_id)
+    params.require(:article).permit(:name, :description, :language_id,
+                                    :user_id, tag_ids: [])
   end
 
   def article_material_params

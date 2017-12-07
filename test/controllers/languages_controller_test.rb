@@ -1,23 +1,27 @@
 require 'test_helper'
 
 class LanguagesControllerTest < ActionDispatch::IntegrationTest
+  before do
+    @language = Language.create!(name: "Türkçe")
+  end
+
   test "should get index" do
-    get languages_index_url
+    get languages_path
     assert_response :success
   end
 
   test "should get show" do
-    get languages_show_url
+    get language_path(@language)
     assert_response :success
   end
 
   test "should get new" do
-    get languages_new_url
+    get new_language_path
     assert_response :success
   end
 
   test "should get edit" do
-    get languages_edit_url
+    get edit_language_path(@language)
     assert_response :success
   end
 

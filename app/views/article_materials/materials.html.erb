@@ -2,5 +2,5 @@
 <%= render partial: 'translate_orders/form', locals: {article: @article} %> 
 <% @article_materials.each do |article_material| %>
   Açıklama: <%= article_material.description%> <br>
-  <%= link_to 'İndir', download_material_path(article_material) %> <br><br>
+  <button class="btn btn-primary"> <%= link_to 'İndir', download_material_path(article_material), style: "color: white" %></button> <br><br>
 <% end %>
