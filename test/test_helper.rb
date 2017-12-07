@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'minitest/rails/capybara'
 include Capybara::DSL
 require './spec/factories'
+require 'database_cleaner'
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -18,10 +19,21 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-def sign_in()
-  user = FactoryBot.create(:user)
+def sign_in(user)
   visit new_user_session_path
   fill_in "user_email", with: user.email
   fill_in "user_password", with: user.password
   click_on 'Log in'
+end
+
+DatabaseCleaner.strategy = :transaction
+
+class Minitest::Spec
+  before :each do
+    DatabaseCleaner.start
+  end
+
+  after :each do
+    DatabaseCleaner.clean
+  end
 end
