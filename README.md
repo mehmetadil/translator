@@ -1,6 +1,8 @@
 # translator
 
+[![CircleCI](https://circleci.com/gh/mehmetadil/translator.svg?style=svg)](https://circleci.com/gh/mehmetadil/translator)
 [![Code Climate](https://codeclimate.com/github/mehmetadil/translator.svg)](https://codeclimate.com/github/mehmetadil/translator)
+
 
 Tamamlanan Özellikler :
 
