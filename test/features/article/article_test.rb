@@ -10,7 +10,7 @@ feature "Article" do
     fill_in 'article[description]', with: 'This is a test'
     #select "Türkçe", :from => "article_language_id"
     fill_in 'article_article_material_description', with: 'Test Article Material'
-    attach_file('article[article_material][material]', 'tmp/lorem_ipsum.odt')
+    attach_file('article[article_material][material]', 'test/demo_files/lorem_ipsum.odt')
     click_on 'Create Article'
     assert_current_path article_path(Article.last)
   end
