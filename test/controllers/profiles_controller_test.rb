@@ -1,14 +1,17 @@
 require 'test_helper'
 
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
-  test "should get show" do
-    get profiles_show_url
+  before do
+    @user = FactoryBot.create(:user)
+    sign_in(@user)
+  end
+  test 'should get show' do
+    get profile_path(@user.profile)
     assert_response :success
   end
 
-  test "should get edit" do
-    get profiles_edit_url
+  test 'should get edit' do
+    get edit_profile_path(@user.profile)
     assert_response :success
   end
-
 end
