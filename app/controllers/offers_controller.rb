@@ -25,6 +25,8 @@ class OffersController < ApplicationController
                      source_language_id: @translate_order.source_language_id,
                      target_language_id: @translate_order.target_language_id)
 
+    
+    # Projenin yapısına göre aşağıdaki bloğa ihtiyaç duyulmayabilir
     unless @translated_article = TranslatedArticle.check_if_translated_article_exist?(@task.target_language_id)
       @translated_article =
         TranslatedArticle.create(language_id: @task.target_language_id,

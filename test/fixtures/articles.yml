@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-#one:
-#  name: MyString
-#  description: MyText
-#  language_id: 1
-#  user_id: 1
+one:
+  name: Article Number One 
+  description: Article's description 
+  language: turkish
+  user: aragorn
 
 #two:
 #  name: MyString

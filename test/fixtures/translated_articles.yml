@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
-  language_id: 1
-  article_id: 1
+  name: NoNeedNameForNow
+  description: NoNeedDescriptionEither
+  language: turkish
+  article: one
 
 two:
   name: MyString
