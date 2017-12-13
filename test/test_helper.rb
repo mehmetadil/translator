@@ -5,6 +5,8 @@ require 'minitest/rails/capybara'
 include Capybara::DSL
 require './spec/factories'
 require 'database_cleaner'
+require 'minitest/reporters'
+Minitest::Reporters.use!
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
