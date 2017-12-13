@@ -2,12 +2,9 @@ require 'test_helper'
 
 feature 'Article' do
   scenario 'user can add article' do
-    skip
     @user = users(:aragorn)
-    p @user
-    sign_in(@user)
+    login_as(@user, scope: :user)
     visit '/articles/new'
-    p current_path
     fill_in 'Name', with: 'Test Article'
     fill_in 'article[description]', with: 'This is a test'
     #select 'Türkçe', :from => 'article_language_id'

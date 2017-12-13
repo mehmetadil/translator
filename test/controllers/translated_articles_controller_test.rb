@@ -2,8 +2,9 @@ require 'test_helper'
 
 class TranslatedArticlesControllerTest < ActionDispatch::IntegrationTest
   before do
+    @user = users(:aragorn)
     @translated_article = translated_articles(:one)
-    sign_in(@translated_article.article.user)
+    login_as(@user, scope: :user)
   end
 
   test 'should get show' do

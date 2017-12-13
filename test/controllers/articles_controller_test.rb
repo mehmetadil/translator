@@ -2,11 +2,10 @@ require 'test_helper'
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
   before do
-    #TODO: Improvement
     @user = users(:aragorn)
     @language = languages(:turkish)
     @article = articles(:one)
-    sign_in(@user)
+    login_as(@user, scope: :user)
   end
 
   test 'should get index' do
@@ -20,15 +19,11 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get new' do
-    skip
-    #TODO: Authentication Fails
     get new_article_path
     assert_response :success
   end
 
   test 'should get edit' do
-    skip
-    #TODO: Authentication Fails
     get edit_article_path(@article)
     assert_response :success
   end

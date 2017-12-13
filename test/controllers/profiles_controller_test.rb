@@ -3,7 +3,7 @@ require 'test_helper'
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
   before do
     @user = users(:aragorn)
-    sign_in(@user)
+    login_as(@user, scope: :user)
   end
   test 'should get show' do
     get profile_path(@user.profile)

@@ -1,5 +1,6 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path("../../config/environment", __FILE__)
+include Warden::Test::Helpers
 require 'rails/test_help'
 require 'minitest/rails/capybara'
 include Capybara::DSL
@@ -18,13 +19,14 @@ class ActiveSupport::TestCase
   fixtures :all
   # Add more helper methods to be used by all tests here...
 end
-
+=begin
 def sign_in(user)
   visit new_user_session_path
   fill_in "user_email", with: user.email
   fill_in "user_password", with: user.password
   click_on 'Log in'
 end
+=end
 
 DatabaseCleaner.strategy = :transaction
 
