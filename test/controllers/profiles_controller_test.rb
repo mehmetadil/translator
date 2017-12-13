@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
   before do
-    @user = FactoryBot.create(:user)
+    @user = users(:aragorn)
     sign_in(@user)
   end
   test 'should get show' do

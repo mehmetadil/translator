@@ -45,7 +45,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara'
-  gem 'factory_bot'
   gem 'minitest-rails-capybara'
   gem 'pry-rails'
   gem 'selenium-webdriver'

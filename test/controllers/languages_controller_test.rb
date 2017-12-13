@@ -2,7 +2,7 @@ require 'test_helper'
 
 class LanguagesControllerTest < ActionDispatch::IntegrationTest
   before do
-    @language = Language.create!(name: "Türkçe")
+    @language = languages(:turkish)
   end
 
   test "should get index" do

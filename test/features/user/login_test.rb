@@ -1,13 +1,15 @@
-require "test_helper"
+require 'test_helper'
 
-feature "User::Login" do
-  scenario "user can login" do
-    user = FactoryBot.create(:user)
+feature 'User::Login' do
+  before do
+    @user = User.create(email: 'example@rails.com', password: '123456')
+  end
 
-    visit '/users/sign_in' 
+  scenario 'user can login' do
+    visit '/users/sign_in'
 
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
     click_on 'Log in'
     assert_equal '/', current_path
   end
