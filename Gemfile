@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'devise'
-gem 'paperclip', '~> 5.0.0'
+gem 'paperclip', '~> 5.2.0'
 gem 'paperclip_database', '~> 2.0'
 gem 'simple_form'
 group :development, :test do
