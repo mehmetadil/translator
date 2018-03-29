@@ -7,3 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Language.create(name: "Türkçe")
 Language.create(name: "English")
+Tag.create(name: "Fen Bilimleri")
+Tag.create(name: "Sosyal Bilimler")
+Tag.create(name: "Psikoloji")
