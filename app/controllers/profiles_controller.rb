@@ -20,6 +20,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :avatar)
+    params.require(:profile).permit(:first_name, :last_name, :zanata_username, :avatar)
   end
 end

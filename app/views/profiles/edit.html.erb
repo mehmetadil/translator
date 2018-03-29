@@ -3,6 +3,7 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
+  <%= f.input :zanata_username %>
   <%= f.input :avatar, as: :file %>
   <%= f.button :submit %>
 <% end %>

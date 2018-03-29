@@ -100,7 +100,7 @@ module Zanata
         @driver = Selenium::WebDriver.for :firefox, options: options
       end
 
-      def main(project_id, project_name, project_translator, file_path, project_description = '')
+      def work(project_id, project_name, project_translator, file_path, project_description = '')
         @project = Project.new(project_id, project_name, project_translator,
                                file_path, project_description)
         initialize_driver
