@@ -6,7 +6,7 @@ module Zanata
     class Project
       attr_reader :id, :name, :description, :translator, :file_path
 
-      def initialize(id, name, translator, file_path, description)
+      def initialize(id, name, file_path, description, translator = '')
         @id = id
         @name = name
         @translator = translator
@@ -18,7 +18,6 @@ module Zanata
     module_function
 
       def login
-        p 'Logging in to Zanata'
         url = @base_url + '/account/sign_in'
         @driver.navigate.to url
         form_username = @driver.find_element name: 'loginForm:username'
@@ -30,7 +29,6 @@ module Zanata
       end
 
       def create_project
-        p 'Creating a Project'
         url = @base_url + '/project/create'
         @driver.navigate.to url
         form_project_name = @driver.find_element name: 'project-form:name:input:name'
@@ -45,7 +43,6 @@ module Zanata
       end
 
       def create_version
-        p 'Creating a Version'
         url = @base_url + "/project/add_iteration/#{@project.id}"
         @driver.navigate.to url
         version_id = @driver.find_element name: 'create-version-form:slug:input:slug'
@@ -55,23 +52,23 @@ module Zanata
       end
 
       def assign_language(version_id = 1)
-        p 'Assigning a Language'
         url = @base_url + "/iteration/view/#{@project.id}/#{version_id}/settings/languages"
         @driver.navigate.to url
         enable_button = @driver.find_element name: 'settings-languages-form:j_idt1143:0:j_idt1147:j_idt1149'
         enable_button.click
       end
 
-      def assign_translator
-        p 'Assigning a translator'
-        url = @base_url + "/project/view/#{@project.id}/people"
+      def assign_translator(project_id, project_translator)
+        initialize_driver
+        login
+        url = @base_url + "/project/view/#{project_id}/people"
         @driver.navigate.to url
         add_someone_button = @driver.find_element name: 'project-people_add:project-people_addbutton:j_idt301'
         add_someone_button.click
         sleep(2)
         username_input = @driver.find_element id: 'modalManagePermissionsAutocomplete-autocomplete__input'
         add_person_button = @driver.find_element name: 'peopleTab-permissions:j_idt602'
-        username_input.send_keys @project.translator + "\n"
+        username_input.send_keys project_translator + "\n"
         sleep(2)
         @driver.action.send_keys("\n").perform
         sleep(2)
@@ -79,10 +76,10 @@ module Zanata
         translate_content.click
         submit_button = @driver.find_element id: 'peopleTab-permissions:j_idt602'
         submit_button.click
+        @driver.close
       end
 
       def upload_file
-        p 'Uploading a file'
         url = @base_url + "/iteration/view/#{@project.id}/1/settings/documents"
         @driver.navigate.to url
         file_upload_button = @driver.find_element id: 'file-upload-component-toggle-button'
@@ -97,18 +94,39 @@ module Zanata
 
       def initialize_driver
         options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-        @driver = Selenium::WebDriver.for :firefox, options: options
+        @driver = Selenium::WebDriver.for :firefox#, options: options
       end
 
-      def work(project_id, project_name, project_translator, file_path, project_description = '')
-        @project = Project.new(project_id, project_name, project_translator,
-                               file_path, project_description)
+      def work(options = {})#(project_id, project_name, project_translator, file_path, project_description = '')
+        @project = Project.new(
+          options[:project_id],
+          options[:project_name],
+          options[:project_translator],
+          options[:file_path],
+          options[:project_description]
+        )
         initialize_driver
         login
         create_project
         create_version
-        #assign_language('deneme' + seed.to_s)
+        #assign_language
         assign_translator
+        upload_file
+        @driver.close
+      end
+
+      def create_project_on_zanata(options = {})
+        @project = Project.new(
+          options[:project_id],
+          options[:project_name],
+          options[:file_path],
+          options[:project_description]
+        )
+
+        initialize_driver
+        login
+        create_project
+        create_version
         upload_file
         @driver.close
       end

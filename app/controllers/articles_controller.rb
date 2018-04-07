@@ -21,7 +21,8 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.article_materials.build(article_material_params)
-    if @article.save
+    if @article.update_attribute(:project_id, set_zanata_project_id)
+      Zanata::Headless.create_project_on_zanata(zanata_params)
       redirect_to article_path(@article)
     else
       render :new
@@ -87,5 +88,23 @@ class ArticlesController < ApplicationController
 
   def user_have_alter_permissions?
     redirect_back(fallback_location: articles_path) unless article_belongs_to_user?
+  end
+
+  def set_zanata_project_id
+    Digest::SHA1.hexdigest @article.name + Time.now.to_s
+  end
+
+  def set_article_file_path
+    Rails.root.to_s + '/public' +
+      @article.article_materials.first.material.url.split('?')[0]
+  end
+
+  def zanata_params
+    {
+      project_id: @article.project_id,
+      project_name: @article.name,
+      file_path: set_article_file_path,
+      project_description: @article.description
+    }
   end
 end

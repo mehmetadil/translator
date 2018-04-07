@@ -19,22 +19,27 @@ class OffersController < ApplicationController
   end
 
   def accept_offer
-    @offer.accepted!
     @task = Task.new(translator_id: @offer.translator_id,
                      offer_id: @offer.id,
                      source_language_id: @translate_order.source_language_id,
-                     target_language_id: @translate_order.target_language_id)
+                     target_language_id: @translate_order.target_language_id,
+                     owner_id: @translate_order.user_id)
 
     
     # Projenin yapısına göre aşağıdaki bloğa ihtiyaç duyulmayabilir
-    unless @translated_article = TranslatedArticle.check_if_translated_article_exist?(@task.target_language_id)
+    unless TranslatedArticle.exist?(@translate_order.article_id, @task.target_language_id)
       @translated_article =
         TranslatedArticle.create(language_id: @task.target_language_id,
                                  article_id: @offer.translate_order.article_id)
+    else
+      @translated_article = TranslatedArticle.find_by(language_id: @task.target_language_id)
     end
-    @task.update_attribute(:translated_article_id, @translated_article.id)
 
-    if @task.save
+    if @task.update_attribute(:translated_article_id, @translated_article.id)
+      #@offer.accepted!
+      #Thread.new do
+        Zanata::Headless.assign_translator(@translate_order.article.project_id, @task.translator.profile.zanata_username)
+      #end
       redirect_to translate_order_path(@offer.translate_order_id)
     else
       redirect_to translate_order_path(@offer.translate_order_id)
@@ -54,5 +59,14 @@ class OffersController < ApplicationController
 
   def set_offer_translate_order
     @translate_order = @offer.translate_order
+  end
+
+  def set_zanata_project_id
+    Digest::SHA1.hexdigest (@offer.translate_order.article.name + Time.now.to_s)
+  end
+
+  def set_article_file_path
+    Rails.root.to_s + '/public' +
+      @translate_order.article.article_materials.first.material.url.split('?')[0]
   end
 end
