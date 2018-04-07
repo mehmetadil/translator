@@ -1,7 +1,7 @@
 require 'test_helper'
-
 feature 'Article' do
   scenario 'user can add article' do
+    skip('zanata eklentisinden dolayı test devre dışı bırakıldı')
     @user = users(:aragorn)
     login_as(@user, scope: :user)
     visit '/articles/new'
