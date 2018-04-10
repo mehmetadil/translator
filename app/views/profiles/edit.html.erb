@@ -1,9 +1,15 @@
 <h1>Düzenle</h1>
 
 <%= simple_form_for(@profile) do |f| %>
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :zanata_username %>
-  <%= f.input :avatar, as: :file %>
-  <%= f.button :submit %>
+	<%= f.label "İsim" %>
+  <%= f.input :first_name, label: false %>
+  <%= f.label "Soyisim" %>
+  <%= f.input :last_name, label: false %>
+  <%= f.label "Hakkımda" %> <br>
+  <%= f.input :about_me, as: :text, label: false %> <br>
+  <%= f.label "Zanata Kullanıcı Adı" %> <a href="http://localhost:8080/zanata/account/register">üye ol</a>
+  <%= f.input :zanata_username, label: false, placeholder: 'Çevirmenler için gereklidir'%>
+  <%= f.label "Profile Resmi" %>
+  <%= f.input :avatar, as: :file, label: false %>
+  <%= f.button :submit, "Kaydet", class: 'btn btn-success' %>
 <% end %>

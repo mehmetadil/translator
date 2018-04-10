@@ -1,9 +1,25 @@
-<h1>Profilim</h1>
-İsim: <%= @profile.first_name %> <br>
-Soy İsim: <%= @profile.last_name %> <br>
-Zanata Kullanıcı Adı: <%= @profile.zanata_username %> <br>
-Email:  <%= @profile.user.email %> <br><br>
-
-<% if profile_belongs_to_user?(@profile, current_user) %>
-  <%= link_to "Güncelle", edit_profile_path(@profile) %>
-<% end %>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+		  <div class="col-md-3">
+		 	<%= image_tag @profile.avatar.url(:medium), height: '248', width: '200' %>
+		  </div>
+		  <div class="col-md-9">
+		    <ul class="list-group">
+		      <li class="list-group-item"><b> <%= @profile.first_name %></b></li> 
+		      <li class="list-group-item"><b> <%= @profile.last_name %></b></li> 
+			      <li class="list-group-item"><b> <%= @profile.user.email %></b></li>
+			      <b> <textarea class="list-group-item" rows="4" cols="50" style="width:100%"> At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+						</textarea></b>
+		    </ul>
+		  </div>  
+		</div>
+		<%= link_to "Profilimi Düzenle", edit_profile_path ,class: "btn btn-primary" if current_user == @profile.user %>
+		<%= link_to "Geri", root_path, class: "btn btn-warning" %> <br>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<h1>Projeler</h1>
+	</div>
+</div>
