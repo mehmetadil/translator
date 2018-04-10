@@ -133,12 +133,28 @@ module Zanata
   end
 
   module Api
-    def proggression
+    require 'httparty'
+    require 'json'
+
+    module_function
+
+    @base_url = 'http://localhost:8080/zanata/rest/'
+
+    def proggression(project_id)
+      uri = @base_url + "stats/proj/#{project_id}/iter/1"
+      headers = {
+        Accept: 'application/json'
+      }
+      response = HTTParty.get(uri, headers: headers)
+      JSON.parse(response.body)['stats'].first
     end
 
-    def translated_file
+    def translated_file_url(project_id, filename)
+      "localhost:8080/zanata/rest/file/translation/#{project_id}/1/en-US/baked?docId=#{filename}"
     end
   end
 end
 
+#Zanata::Api.translated_file_url
+#Zanata::Api.proggression('e06efe3726837bd2068b9a008d0e1bac538c319e')
 #Zanata::Headless.main(Random.rand(1..10**8), 'deneme', 'ahmet', '~/Desktop/deneme.odt')
