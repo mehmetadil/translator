@@ -3,18 +3,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">İstek Oluştur</h4>
+        <h4 class="modal-title">Çeviri İlanı Oluştur</h4>
       </div>
       <div class="modal-body">
         <%= simple_form_for(article.translate_orders.build, url: create_translate_order_path, method: 'post') do |f| %>
-          <%= f.input :title %>
-          <%= f.input :description %>
-          <%= f.input :price %>
+          <%= f.label "İlan Başlığı" %>
+          <%= f.input :title, label: false %>
+          <%= f.label "Açıklama" %>
+          <%= f.input :description, label: false %>
+          <%= f.label "Teklif Edilen Ücret" %>
+          <%= f.input :price, label:false %>
+          <%= f.label "Çevrilmesi İstenilen Dil" %> <br>
           <%= f.select :target_language_id, all_languages.map {|language| [language.name, language.id]} %> </br><br>
           <%= f.input :source_language_id, as: 'hidden', input_html: { value: article.language_id} %>
           <%= f.input :user_id, as: 'hidden', input_html: { value: article.user_id} %>
           <%= f.input :article_id, as: 'hidden', input_html: { value: article.id} %>
-          <%= f.button :submit, class: "btn btn-success" %>
+          <%= f.button :submit, "İlan Oluştur", class: "btn btn-success" %>
         <% end %>      
       </div>
       <div class="modal-footer">
