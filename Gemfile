@@ -37,6 +37,7 @@ gem 'devise'
 gem 'paperclip', '~> 5.2.0'
 gem 'paperclip_database', '~> 2.0'
 gem 'simple_form'
+gem 'httparty'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # Adds support for Capybara system testing and selenium driver
