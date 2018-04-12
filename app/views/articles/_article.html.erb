@@ -1,14 +1,17 @@
-Makale Adı: <%= article.name%> </br>
-Açıklama:<%= article.description%> </br>
-Dil:<%= article.language.name%> </br>
-Proje linki:
-Etiketler:
+<h1><b><%= link_to article.name, article_path(article), {style: 'color:black; text-decoration:none'} %></b></h1>
+<h4><%= article.description%></h4>
+ <h5>Kaynak Dili <b><%= article.language.name%></b></h5>
+Etiketler
 <% article.tags.each do |tag| %>
-  <%= tag.name %>
-<% end %> <br> <br>
+  <b> <%= link_to tag.name %></b>
+<% end %> <br>
+<h5>Proje <b><%= article.created_at.to_date %></b> tarihinde oluşturuldu</h5>  
 <% if article.belongs_to_user?(current_user) %>
   <%= link_to 'Düzenle', edit_article_path(article), class: "btn btn-primary" %>
   <%= link_to 'Sil', article_path(article), method: 'delete', class: "btn btn-danger" %> <br><br>
-  <%= link_to "Çeviri İlanı", article_translate_orders_path(article), class: "btn btn-warning" %> <br> <br>
-  <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#create_translate_order">Çeviri İlanı Oluştur</button><br>
+  <% if article.translate_orders.any? %>
+  	<%= link_to "Çeviri İlanına Git", translate_order_path(article.translate_orders.first), class: "btn btn-warning" %> <br> <br>
+  <% else %>
+  	<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#create_translate_order">Çeviri İlanı Oluştur</button><br>
+  <% end %>
 <% end %>

@@ -1,11 +1,38 @@
-<h1> Tekliflerim </h1>
-<% @offers.each do |offer| %>
-  Açıklama: <%= offer.description%> </br>
-  Fiyat: <%= offer.price%> </br>
-  Çeviri Süresi: <%= offer.translation_time %> </br>
-  Teklif Durumu: <%= offer.status%> </br>
-  İlgili İlan: <%= link_to offer.translate_order.title, translate_order_path(offer.translate_order) %> <br>
-  İlan Sahibi:
-  <%= image_tag offer.translate_order.user.profile.avatar.url, size: 15 %> 
-  <%= link_to offer.translate_order.user.email, profile_path(offer.translate_order.user) %>  <br> <br>  
+<h1><b> Tekliflerim </b></h1>
+<hr class="divider">
+<% @myoffers.each do |offer| %>
+	<% @zanata_project_url =  zanata_project_url(offer.translate_order.article.project_id, offer.translate_order.article.article_materials.first.material.original_filename) %>
+	<div class="panel panel-default">
+	    <div class="panel-body">
+	      <div class="col-md-9">
+	          <h1><b><%= offer.translate_order.title %></b></h1>
+	          <h3><%= offer.translate_order.description %></h3>
+	          <h5>Çeviri Ücreti: <b><%= offer.translate_order.price %></b><i class="fas fa-lira-sign"></i></h5> 
+	          <h5>Kaynak Dil: <b><%= offer.translate_order.source_language.name %></b></h5>
+	          <h5>Hedef Dil: <b><%= offer.translate_order.target_language.name %></b></h5> 
+	      </div> 
+	      <div class="col-md-3">
+	      <h3><b>İlan Sahibi</b></h3> 
+	      <%= image_tag offer.translate_order.user.profile.avatar.url, size: 100 %>
+	      <h4><%=  link_to offer.translate_order.user.profile.full_name, profile_path(offer.translate_order.user) %></h4>
+	      </div>
+	      <div class="col-md-9">  
+	            <button class= 'btn btn-primary btn-lg'><%= link_to 'Projeye Git', @zanata_project_url, {target: '_blank', style: 'color:white'} %></button>
+	            <button class= 'btn btn-info btn-lg'><%= link_to 'İlana Git', translate_order_path(offer.translate_order), {style: 'color:white'} %></button>
+	      </div>
+	      <div class="col-md-3">
+	        <h4>Bu ilan <b><%= offer.translate_order.created_at.to_date %></b> tarihinde oluşturuldu</h4> <br><br>
+	      </div>
+		  <h1><b>Benim Teklifim</b></h1>
+		  <div class="col-md-8">
+		  	<h3><%= offer.description %></h3>
+		  </div>
+		  <div class="col-md-4">
+		  	  <h5><b><%= offer.translation_time %> gün içinde <%= offer.price %></b><i class="fas fa-lira-sign"></i>
+			  <h5>Teklif Durumu: <b><%= t("#{offer.status}") %></b></h5>
+		  </div>
+		  <hr class="divider">
+		  
+	  </div>
+	</div>
 <% end %>

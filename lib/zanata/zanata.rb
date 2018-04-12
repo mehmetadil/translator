@@ -94,7 +94,7 @@ module Zanata
 
       def initialize_driver
         options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-        @driver = Selenium::WebDriver.for :firefox#, options: options
+        @driver = Selenium::WebDriver.for :firefox, options: options
       end
 
       def work(options = {})#(project_id, project_name, project_translator, file_path, project_description = '')
@@ -147,10 +147,6 @@ module Zanata
       }
       response = HTTParty.get(uri, headers: headers)
       JSON.parse(response.body)['stats'].first
-    end
-
-    def translated_file_url(project_id, filename)
-      "localhost:8080/zanata/rest/file/translation/#{project_id}/1/en-US/baked?docId=#{filename}"
     end
   end
 end

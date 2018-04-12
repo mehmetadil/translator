@@ -6,7 +6,7 @@ class OffersController < ApplicationController
   def show; end
 
   def myoffers
-    @offers = current_user.offers
+    @myoffers = current_user.offers
   end
 
   def create

@@ -4,14 +4,115 @@
 <%= render partial: 'translate_orders/form', locals: {article: @article} %>
     </div>
 </div>
+<% @progress = translation_progress(@article.project_id) %>
+<% @translated_file_url =  translated_file_url(@article.project_id, @article.article_materials.first.material.original_filename) %>
+<% @zanata_project_url =  zanata_project_url(@article.project_id, @article.article_materials.first.material.original_filename) %>
+<div class="panel panel-default">
+    <div class="panel-body" style= 'background: lightblue'>
+        <div class="col-md-11">
+            <h1><%= @progress['locale'] %></h1>
+        </div>
+        <div class="col-md-1">
+            <%= link_to '<i class="fas fa-arrow-alt-circle-right" style="font-size: 18px"></i>'.html_safe, @zanata_project_url, {style: 'color:black', title: 'Projeye Git', target: '_blank' } %>
+            <%= link_to '<i class="fas fa-download" style="font-size: 18px"></i>'.html_safe, @translated_file_url, {style: 'color:black', title: 'Tercüme Dosyasını İndir', target: "_blank" }  %>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+        <% if @progress['percentage'] == '100' %>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 100%; background-color: green" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div> 
+        <% else %>
+            <div class="progress progress-striped active">
+              <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progress['percentage'] %>%"></div>
+            </div>
+        <% end %>           
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <h4>Kaynak içeriği <b><%= @progress['total'] %></b> Kelime Barındırıyor</h4>
+            <h4>Bu zamana kadar <b><%= @progress['translated'] %></b> kelime tercüme edildi </h4>
+            <h4>Son Çeviri <b><%= @progress['lastTranslate'] %></b> Tarihinde Yapıldı</h4>
+            <h4>Son Değişiklik yapan kullanıcı <b><%= @progress['lastTranslatedP'] %></b></h4>
+        </div>
+        <div class="col-md-6">
+            <h4>Tercüme Durumu <b>%<%= @progress['percentage'] %></b></h4>
+            <h4>Gözden Geçirilmesi Gereken <b><%= @progress['needReview'] %></b> kelime bulunuyor</h4>
+            <h4>Tercümesi Kabul Edilen <b><%= @progress['approved'] %></b> kelime bulunuyor</h4>
+            <h4>Tercümesi Reddedilen <b><%= @progress['rejected'] %></b> kelime bulunuyor</h4>
+        </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-body" style= 'background: lightblue'>
+        <div class="col-md-11">
+            <h1>Almanca</h1>
+        </div>
+        <div class="col-md-1">
+            <%= link_to '<i class="fas fa-arrow-alt-circle-right" style="font-size: 18px"></i>'.html_safe, root_path, {style: 'color:black', title: 'Projeye Git' } %>
+            <%= link_to '<i class="fas fa-download" style="font-size: 18px"></i>'.html_safe, root_path, {style: 'color:black', title: 'Tercüme Dosyasını İndir' }  %>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+            
         <div class="progress progress-striped active">
-          <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: <%= 60 %>%">
-            <span class="sr-only">80% Complete</span>
-            %80
-            </div>
+          <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 80%"></div>
+        </div>            
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <h4>Kaynak içeriği <b>2000</b> Kelime Barındırıyor</h4>
+            <h4>Bu zamana kadar <b>1600</b> kelime tercüme edildi </h4>
+            <h4>Son Çeviri <b><%= @progress['lastTranslate'] %></b> Tarihinde Yapıldı</h4>
+            <h4>Son Değişiklik yapan kullanıcı <b><%= @progress['lastTranslatedP'] %></b></h4>
+        </div>
+        <div class="col-md-6">
+            <h4>Tercüme Durumu <b>%80</b></h4>
+            <h4>Gözden Geçirilmesi Gereken <b><%= @progress['needReview'] %></b> kelime bulunuyor</h4>
+            <h4>Tercümesi Kabul Edilen <b><%= @progress['approved'] %></b> kelime bulunuyor</h4>
+            <h4>Tercümesi Reddedilen <b><%= @progress['rejected'] %></b> kelime bulunuyor</h4>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-body" style= 'background: lightblue'>
+        <div class="col-md-11">
+            <h1>Fransızca</h1>
+        </div>
+        <div class="col-md-1">
+            <%= link_to '<i class="fas fa-arrow-alt-circle-right" style="font-size: 18px"></i>'.html_safe, root_path, {style: 'color:black', title: 'Projeye Git' } %>
+            <%= link_to '<i class="fas fa-download" style="font-size: 18px"></i>'.html_safe, root_path, {style: 'color:black', title: 'Tercüme Dosyasını İndir' }  %>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
+            
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 100%; background-color: green" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>          
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+            <h4>Kaynak içeriği <b>7368</b> Kelime Barındırıyor</h4>
+            <h4>Bu zamana kadar <b>7368</b> kelime tercüme edildi </h4>
+            <h4>Son Çeviri <b><%= @progress['lastTranslate'] %></b> Tarihinde Yapıldı</h4>
+            <h4>Son Değişiklik yapan kullanıcı <b><%= @progress['lastTranslatedP'] %></b></h4>
+        </div>
+        <div class="col-md-6">
+            <h4>Tercüme Durumu <b>%100</b></h4>
+            <h4>Gözden Geçirilmesi Gereken <b><%= @progress['needReview'] %></b> kelime bulunuyor</h4>
+            <h4>Tercümesi Kabul Edilen <b><%= @progress['approved'] %></b> kelime bulunuyor</h4>
+            <h4>Tercümesi Reddedilen <b><%= @progress['rejected'] %></b> kelime bulunuyor</h4>
+        </div>
         </div>
     </div>
 </div>

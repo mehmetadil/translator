@@ -1,11 +1,30 @@
+<h1><b>İlanlar</b></h1>
+<hr class="divider">
 <% translate_orders.each do |translate_order| %>
-  İlan: <%= link_to translate_order.title, translate_order_path(translate_order) %> <br>
-  Açıklama: <%= translate_order.description %> <br>
-  Çeviri Ücreti: <%= translate_order.price %> <br>
-  Kaynak Dil:<%= translate_order.source_language.name %> <br>
-  Hedef Dil: <%= translate_order.target_language.name %> <br>
-  İlan Tarihi: <%= translate_order.created_at.strftime("%d/%m/%Y") %> <br>
-  İlan Sahibi:
-  <%= image_tag translate_order.user.profile.avatar.url, size: 15 %>
-  <%= link_to translate_order.user.email, profile_path(translate_order.user.profile) %> <br> <br>
+	<% @zanata_project_url =  zanata_project_url(translate_order.article.project_id, translate_order.article.article_materials.first.material.original_filename) %>
+	<div class="panel panel-default">
+	    <div class="panel-body">
+	      <div class="col-md-9">
+	          <h1><b><%= translate_order.title %></b></h1>
+	          <h3><%= translate_order.description %></h3>
+	          <h5>Çeviri Ücreti: <b><%= translate_order.price %></b><i class="fas fa-lira-sign"></i></h5> 
+	          <h5>Kaynak Dil: <b><%= translate_order.source_language.name %></b></h5>
+	          <h5>Hedef Dil: <b><%= translate_order.target_language.name %></b></h5> 
+	      </div> 
+	      <div class="col-md-3">
+	      <h3><b>İlan Sahibi</b></h3> 
+	      <%= image_tag translate_order.user.profile.avatar.url, size: 100 %>
+	      <h4><%=  link_to translate_order.user.profile.full_name, profile_path(translate_order.user) %></h4>
+	      </div>
+	      <div class="col-md-9">  
+	            <button class= 'btn btn-primary btn-lg'><%= link_to 'Projeye Git', @zanata_project_url, {target: '_blank', style: 'color:white'} %></button>
+	            <% unless order_belongs_to_user?(translate_order, current_user) %>
+	                <button type="button" class="btn btn-info btn-lg"><%= link_to 'Teklif Ver', translate_order_path(translate_order), {style: 'color:white'} %></button> <br><br>
+	            <% end %>
+	      </div>
+	      <div class="col-md-3">
+	        <h4>Bu ilan <b><%= translate_order.created_at.to_date %></b> tarihinde oluşturuldu</h4>
+	      </div>
+	  </div>
+	</div>
 <% end %>

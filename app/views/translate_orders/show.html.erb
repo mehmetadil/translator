@@ -1,34 +1,59 @@
-<%= @translate_order.title %> <br>
-Açıklama: <%= @translate_order.description %> <br>
-Çeviri Ücreti:  <%= @translate_order.price %> <br>
-Kaynak Dil: <%= @translate_order.source_language.name %> <br>
-Hedef Dil: <%= @translate_order.target_language.name %> <br> 
-İlan Sahibi:
-<%= image_tag @translate_order.user.profile.avatar.url, size: 15 %>
-<%= link_to @translate_order.user.email, profile_path(@translate_order.user) %> <br> <br>
+<% @zanata_project_url =  zanata_project_url(@translate_order.article.project_id, @translate_order.article.article_materials.first.material.original_filename) %>
+<div class="panel panel-default">
+    <div class="panel-body">
+      <div class="col-md-9">
+          <h1><b><%= @translate_order.title %></b></h1>
+          <h3><%= @translate_order.description %></h3>
+          <h5>Çeviri Ücreti: <b><%= @translate_order.price %></b><i class="fas fa-lira-sign"></i></h5> 
+          <h5>Kaynak Dil: <b><%= @translate_order.source_language.name %></b></h5>
+          <h5>Hedef Dil: <b><%= @translate_order.target_language.name %></b></h5> 
+      </div> 
+      <div class="col-md-3">
+      <h3><b>İlan Sahibi</b></h3> 
+      <%= image_tag @translate_order.user.profile.avatar.url, size: 100 %>
+      <h4><%=  link_to @translate_order.user.profile.full_name, profile_path(@translate_order.user) %></h4>
+      </div>
+      <div class="col-md-9">  
+            <button class= 'btn btn-primary btn-lg'><%= link_to 'Projeye Git', @zanata_project_url, {target: '_blank', style: 'color:white'} %></button>
+            <% unless order_belongs_to_user?(@translate_order, current_user) %>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Teklif Ver</button> <br><br>
+            <% end %>
+      </div>
+      <div class="col-md-3">
+        <h4>Bu ilan <b><%= @translate_order.created_at.to_date %></b> tarihinde oluşturuldu</h4>
+      </div>
+  </div>
+</div>
 
 
-<% unless order_belongs_to_user?(@translate_order, current_user) %>
-  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create_translate_order">Teklif Ver</button> <br><br>
-<% end %>
 
 
+<div class="panel panel-default">
+    <div class="panel-body">
+      <h2>Bu proje için  <b><%= @offers.count %></b> adet teklif bulunuyor</h2>
+      <hr class="divider">
+      <% @offers.each do |offer| %>
+        <div class="col-md-4">
+            <%= image_tag offer.translator.profile.avatar.url, size: 100, style: "background-color: white" %>
+        </div>
+        <div class="col-md-4">
+            <h3><b><%= link_to offer.translator.profile.zanata_username, profile_path(offer.translator) %></b></h3>
+            <h5><%= offer.description %></h5>
+        </div>
+        <div class="col-md-4">
+            <h5><b><%= offer.translation_time %> gün içinde <%= offer.price %></b><i class="fas fa-lira-sign"></i>
 
-<h2>Teklifler</h2>
-<% @offers.each do |offer| %>
-  Açıklama: <%= offer.description %> <br>
-  Talep Edilen Ücret: <%= offer.price %> <br>
-  Çeviri Süresi: <%= offer.translation_time %> <br>
-  Teklif Tarihi: <%= offer.created_at.strftime("%d/%m/%Y") %> <br>
-  Teklif Eden:
-  <%= image_tag offer.translator.profile.avatar.url, size: 15 %>
-  <%= link_to offer.translator.email, profile_path(offer.translator.profile) %> <br>
-  <% if order_belongs_to_user?(@translate_order, current_user) && !(offer.accepted?) %>  
-    <button class= "btn btn-success"><%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put', style: "color: white; text-decoration: none"%>
-    </button>
-  <% elsif order_belongs_to_user?(@translate_order, current_user) && offer.accepted? %>
-    <h4> Teklif Kabul Edildi </h4>
-  <% end %> <br> <br>
-<% end %>
+</h5>
+            <h5>Teklif Tarihi:<b> <%= offer.created_at.strftime("%d/%m/%Y") %></b></h6> <br>
+        <% if order_belongs_to_user?(@translate_order, current_user) && !(offer.accepted?) %>  
+          <button class= "btn btn-success"><%= link_to "Teklifi Kabul Et", accept_offer_path(offer), method: 'put', style: "color: white; text-decoration: none"%>
+          </button>
+        <% elsif order_belongs_to_user?(@translate_order, current_user) && offer.accepted? %>
+          <h4> Teklif Kabul Edildi </h4>
+        <% end %> <br> <br>
+        </div>
+      <% end %>
+    </div>
+</div>
 
 <%= render 'offers/form' %>
