@@ -35,7 +35,7 @@
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><%= link_to "Translator", root_path, style: "color: rgba(255,255,255,0.75)"%></li>
+              <li><%= link_to "Tercüman", root_path, style: "color: rgba(255,255,255,0.75)"%></li>
               <li><%= link_to 'Makalelerim', myarticles_path, style: "color: rgba(255,255,255,0.75)" %></li>
               <li><%= link_to 'Tekliflerim', myoffers_path, style: "color: rgba(255,255,255,0.75)" %></li>
               <li><%= link_to "İlanlar", translate_orders_path, style: "color: rgba(255,255,255,0.75)" %></li>
@@ -59,11 +59,15 @@
         </div><!-- /.container-fluid -->
       </nav>
     </div>
+    <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
       <%= yield %>
     </div>
-    <div class="col-md-3">
     </div>
+    <div class="row">
+    <div class="col-md-3"></div>
+</body>
+</html>
   </body>
 </html>

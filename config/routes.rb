@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+
   resources :profiles, only: %i[show edit update]
   get 'translated_articles/show'
 
-  root 'articles#index'
+  root 'landing#welcome'
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :articles
   get 'myarticles', to: 'articles#myarticles'
