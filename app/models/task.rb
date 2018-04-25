@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
-  enum status: { in_progress: 0, done: 1, pending_approval: 2 }
+  extend Enumerize
+  enumerize :status, in: { in_progress: 0, done: 1, pending_approval: 2 }
   belongs_to :offer
   belongs_to :translated_article
   belongs_to :translator, foreign_key: 'translator_id', class_name: 'User'

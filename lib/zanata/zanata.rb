@@ -94,7 +94,7 @@ module Zanata
 
       def initialize_driver
         options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
-        @driver = Selenium::WebDriver.for :firefox, options: options
+        @driver = Selenium::WebDriver.for :firefox#, options: options
       end
 
       def work(options = {})#(project_id, project_name, project_translator, file_path, project_description = '')

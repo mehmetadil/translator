@@ -2,26 +2,29 @@
 	<div class="panel-body">
 		<div class="row">
 		  <div class="col-md-3">
-		 	<%= image_tag @profile.avatar.url(:medium), height: '248', width: '200' %>
+		 	<%= image_tag @profile.avatar.url(:medium), height: '225', width: '200' %>
 		  </div>
 		  <div class="col-md-9">
 		    <ul class="list-group">
-		      <li class="list-group-item"><b> <%= @profile.first_name %></b></li> 
-		      <li class="list-group-item"><b> <%= @profile.last_name %></b></li> 
-			      <li class="list-group-item"><b> <%= @profile.user.email %></b></li>
+		      <li class="list-group-item">İsim: <b> <%= @profile.first_name %></b></li> 
+		      <li class="list-group-item">Soyisim: <b> <%= @profile.last_name %></b></li> 
+			  <li class="list-group-item">E-mail: <b> <%= @profile.user.email %></b></li>
+			  <li class="list-group-item">Telefon: <b> <%= @profile.phone_number %></b></li>
+			  <li class="list-group-item">Akademik Ünvan: <b> <%= @profile.academic_title.text %></b></li>			  
 			      <b> <textarea class="list-group-item" rows="4" cols="50" style="width:100%"> <%= @profile.about_me %>
 						</textarea></b>
 		    </ul>
 		  </div>  
-		</div>
+		</div> <br>
 		<%= link_to "Profilimi Düzenle", edit_profile_path ,class: "btn btn-primary" if current_user == @profile.user %>
-		<%= link_to "Geri", root_path, class: "btn btn-warning" %> <br>
+		<%= link_to "Geri", root_path, class: "btn btn-warning" if current_user == @profile.user %> <br>
 	</div>
 </div>
 <div class="panel panel-default">
 	<div class="panel-body">
+			<h1>Projeler</h1> <br>
+			<%= "Kullanıcının dahil olduğu proje bulunmuyor" unless @profile.user.tasks.where(translator_id: @profile.user_id).any?  %>
 		<% if @profile.user.tasks.where(translator_id: @profile.user_id).any? %>
-			<h1>Projeler</h1>
       		<hr class="divider">
       		<% @profile.user.tasks.where(translator_id: @profile.user_id).each do |task| %>
       			<% @progress = translation_progress(task.translated_article.article.project_id) %>

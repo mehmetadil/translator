@@ -6,7 +6,11 @@
   <%= f.label "Soyisim" %>
   <%= f.input :last_name, label: false %>
   <%= f.label "Hakkımda" %> <br>
-  <%= f.input :about_me, as: :text, label: false %> <br>
+  <%= f.input :about_me, as: :text, label: false %>
+  <%= f.label "Telefon Numarası" %> <br>
+  <%= f.input :phone_number, label: false %>
+  <%= f.label "Akademik Ünvan" %> <br>
+  <%= f.input :academic_title, label: false %>
   <%= f.label "Zanata Kullanıcı Adı" %> <a href="http://localhost:8080/zanata/account/register">üye ol</a>
   <%= f.input :zanata_username, label: false, placeholder: 'Çevirmenler için gereklidir'%>
   <%= f.label "Profile Resmi" %>

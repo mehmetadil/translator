@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410104826) do
+ActiveRecord::Schema.define(version: 20180425145915) do
 
   create_table "article_materials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "description"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20180410104826) do
     t.string "zanata_username"
     t.string "about_me"
     t.string "text"
+    t.string "phone_number"
+    t.integer "academic_title", default: 0
   end
 
   create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

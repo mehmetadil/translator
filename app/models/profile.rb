@@ -1,4 +1,6 @@
 class Profile < ApplicationRecord
+  extend Enumerize
+  enumerize :academic_title, in: { graduate: 0, master: 1, associate_professor: 2, professor: 3 }
   belongs_to :user
   has_attached_file :avatar,
                     styles: {
@@ -12,4 +14,8 @@ class Profile < ApplicationRecord
   def full_name
     [first_name, last_name].reject(&:empty?).join(' ')
   end
+
+  def self.academic_title_attirbutes
+  Hash[Profile.academic_titles.map { |k,v| [k, Profile.academic_title_attribute_name("academic_title.#{k}")] }]
+end
 end

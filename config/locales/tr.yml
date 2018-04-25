@@ -1,2 +1,11 @@
 tr:
-  pending: "Beklemede"
+  enumerize:
+    task:
+      status:
+        pending: "Beklemede"
+    profile:
+      academic_title:
+        graduate: "Lisans"
+        master: "Yüksek Lisans"
+        associate_professor: "Doçent"
+        professor: "Profesör"
