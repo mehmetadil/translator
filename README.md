@@ -3,21 +3,22 @@
 [![CircleCI](https://circleci.com/gh/mehmetadil/translator.svg?style=svg)](https://circleci.com/gh/mehmetadil/translator)
 [![Code Climate](https://codeclimate.com/github/mehmetadil/translator.svg)](https://codeclimate.com/github/mehmetadil/translator)
 
+Tanım :
+
+  Bu proje, üniversitelerde akademik çalışmalar sonucunda ortaya çıkan makalelerin farklı dillere çevrilmesi için gereken tercümanın bulunmasını ve tercümanın çeviriyi kolayca yapabilmesini sağlayacak ortamın oluşturulmasını hedefler.
+  
+
 
 Tamamlanan Özellikler :
 
-  -  Kullanıcılar, makale ve bu makalelerin materyallerini ekleyebilir. (PDF, Afiş vs.) (Paperclip) (article) (article_material)
-  -  Kullanıcılar, makalelerinin çevrilmesi için istekte bulunabilir. (translate_order)
-  -  Makaleler birden çok dile çevrilebilir. (translated_article)
-  -  Kullanıcılar, çeviri isteklerine teklifte bulunabilir. (offer)
+  -  Kullanıcılar, makale ve bu makalelerin materyallerini ekleyebilir. 
+  -  Kullanıcılar, makalelerinin çevrilmesi için istekte bulunabilir.
+  -  Makaleler birden çok dile çevrilebilir. 
+  -  Kullanıcılar, çeviri isteklerine teklifte bulunabilir.
   -  Makalenin sahibi olan kişi, birden çok çevirmenin isteğini kabul edebilir. Bu sayede bir makale tek bir dilde birden çok çeviriye sahip olabilir.
-  -  Teklifi kabul edilen çevirmen için bir çeviri görevi oluşturulur. (task)
-  -  Çevirmen kişi, yaptığı çeviriyi aşama aşama platforma yükleyebilir. Bu sayede basit seviyede bir versiyon takip sistemi oluşur. (version_tracker) (version_tracker_material)
+  -  Teklifi kabul edilen çevirmen için bir çeviri görevi oluşturulur. 
+  -  Çevirmen kişi, yaptığı çeviriyi aşama aşama platforma yükleyebilir. Bu sayede basit seviyede bir versiyon takip sistemi oluşur. 
 
-Eklenebilir Özellikler:
 
-  -  Kullanıcılar için profil oluşturulabilir. Ayrıca çevirmen kullanıcılar için bir derecelendirme (rating) sistemi oluşturulabilir.
-  -  Makalelerin alakalı oldukları akademik konuları belirtmek için 'tag' yapısı oluşturulabilir. 
   
-  
-ER Diagramı : https://drive.google.com/open?id=0B59oB9eA7G2qR1BRR3VXb2FDWmM
+
